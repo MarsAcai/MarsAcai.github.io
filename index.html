@@ -44,26 +44,6 @@
 		.navbar a.active {
 			color: #ffff00; /* yellow color on active */
 		}
-		.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.thumbnail {
-  display: block;
-  margin: 10px;
-}
-
-.thumbnail img {
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.thumbnail:hover img {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
 	</style>
 </head>
 <body>
@@ -78,36 +58,6 @@
 		<a href="characters.html">Characters</a>
 		<a href="about.html">About</a>
 	</div>
-	
-	<div class="gallery">
-$directory = "images"; // Directory where images are stored
-$allowed_types = array("jpg", "jpeg", "gif", "png"); // Allowed image types
-$file_parts = array();
-$ext = "";
-$title = "";
-$i = 0;
-
-$dir_handle = opendir($directory);
-
-while ($file = readdir($dir_handle)) {
-
-    if ($file == "." || $file == "..")
-        continue;
-
-    $file_parts = explode(".", $file);
-    $ext = strtolower(array_pop($file_parts));
-
-    if (in_array($ext, $allowed_types)) {
-
-        echo '<a href="' . $directory . '/' . $file . '"><img src="' . $directory . '/' . $file . '" width="427" height="427"></a>';
-
-        $i++;
-    }
-}
-
-closedir($dir_handle);
-</div>
-
 	<!-- Your page content goes here -->
 </body>
 </html>
