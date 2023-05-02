@@ -44,6 +44,26 @@
 		.navbar a.active {
 			color: #ffff00; /* yellow color on active */
 		}
+		.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnail {
+  display: block;
+  margin: 10px;
+}
+
+.thumbnail img {
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail:hover img {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 	</style>
 </head>
 <body>
@@ -58,6 +78,23 @@
 		<a href="characters.html">Characters</a>
 		<a href="about.html">About</a>
 	</div>
+	
+	<div class="gallery">
+  <!-- Loop through all images in the images folder -->
+  <?php
+    $dir = 'images/';
+    $files = scandir($dir);
+    foreach($files as $file) {
+      if($file !== '.' && $file !== '..') {
+        // Display a thumbnail and link to the full image
+        echo '<a href="'.$dir.$file.'" class="thumbnail">';
+        echo '<img src="'.$dir.$file.'" width="427" height="427" alt="'.$file.'">';
+        echo '</a>';
+      }
+    }
+  ?>
+</div>
+
 	<!-- Your page content goes here -->
 </body>
 </html>
