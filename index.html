@@ -44,42 +44,6 @@
 		.navbar a.active {
 			color: #ffff00; /* yellow color on active */
 		}
-		
-		/* Style for the thumbnails */
-		.thumbnail {
-			display: inline-block;
-			width: 25%; /* Show 4 images per row */
-			padding: 10px;
-			box-sizing: border-box;
-		}
-
-		/* Style for the full-size images */
-		.full-image {
-			display: none; /* Hide by default */
-			position: fixed;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			overflow: auto;
-			background-color: rgba(0,0,0,0.9);
-		}
-		
-		/* Style for the full-size image container */
-		.full-image .container {
-			margin: auto;
-			padding: 20px;
-			width: 80%;
-			max-width: 800px;
-			text-align: center;
-		}
-
-		/* Style for the full-size image */
-		.full-image img {
-			max-width: 100%;
-			max-height: 100%;
-		}
 	</style>
 </head>
 <body>
@@ -94,35 +58,6 @@
 		<a href="characters.html">Characters</a>
 		<a href="about.html">About</a>
 	</div>
-	
-	<!-- Thumbnails -->
-	<div class="gallery">
-		<div class="thumbnail"><img src="image1.jpg" onclick="openFullImage('image1.jpg')"></div>
-		<div class="thumbnail"><img src="image2.jpg" onclick="openFullImage('image2.jpg')"></div>
-		<div class="thumbnail"><img src="image3.jpg" onclick="openFullImage('image3.jpg')"></div>
-		<div class="thumbnail"><img src="image4.jpg" onclick="openFullImage('image4.jpg')"></div>
-		<div class="thumbnail"><img src="image5.jpg" onclick="openFullImage('image5.jpg')"></div>
-		<!-- Add more images here -->
-	</div>
-
-	<!-- Full-size images -->
-	<div class="full-image" onclick="closeFullImage()">
-		<div class="container">
-			<img id="full-image">
-		</div>
-	</div>
-
-	<!-- JavaScript for opening and closing full-size images -->
-	<script>
-		function openFullImage(src) {
-			document.getElementById("full-image").src = src;
-			document.querySelector(".full-image").style.display = "block";
-		}
-
-		function closeFullImage() {
-			document.querySelector(".full-image").style.display = "none";
-		}
-	</script>
 	<!-- Your page content goes here -->
 </body>
 </html>
