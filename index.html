@@ -61,6 +61,57 @@
 			color: #ffff00; /* yellow color on active */
 		}
 	</style>
+	
+	<title>Gallery</title>
+	<style>
+		.gallery {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10px -10px;
+		}
+		.gallery-item {
+			width: calc(25% - 20px);
+			margin: 10px;
+		}
+		.gallery-item img {
+			display: block;
+			width: 100%;
+			height: auto;
+			cursor: pointer;
+		}
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 999;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+		.modal-content {
+			display: block;
+			margin: auto;
+			max-width: 90%;
+			max-height: 90%;
+		}
+		.modal-content img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+		.close {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 10px;
+			color: white;
+			font-size: 30px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 	<div class="topbar">
@@ -74,6 +125,50 @@
 		<a href="characters.html">Characters</a>
 		<a href="about.html">About</a>
 	</div>
+	
+	<body>
+	<div class="gallery">
+		<div class="gallery-item">
+			<img src="home/thumbnail1.jpg" onclick="showImage('home/image1.jpg')">
+		</div>
+		<div class="gallery-item">
+			<img src="home/thumbnail2.jpg" onclick="showImage('home/image2.jpg')">
+		</div>
+		<div class="gallery-item">
+			<img src="home/thumbnail3.jpg" onclick="showImage('home/image3.jpg')">
+		</div>
+		<div class="gallery-item">
+			<img src="home/thumbnail4.jpg" onclick="showImage('home/image4.jpg')">
+		</div>
+		<div class="gallery-item">
+			<img src="home/thumbnail5.jpg" onclick="showImage('home/image5.jpg')">
+		</div>
+	</div>
+
+	<div id="myModal" class="modal">
+		<span class="close" onclick="closeModal()">&times;</span>
+		<img class="modal-content" id="modalImage">
+	</div>
+
+	<script>
+		var modal = document.getElementById("myModal");
+		var modalImg = document.getElementById("modalImage");
+
+		function showImage(src) {
+			modal.style.display = "block";
+			modalImg.src = src;
+		}
+
+		function closeModal() {
+			modal.style.display = "none";
+		}
+
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				closeModal();
+			}
+		}
+	</script>
 	<!-- Your page content goes here -->
 </body>
 </html>
