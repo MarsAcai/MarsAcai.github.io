@@ -1,67 +1,82 @@
+/* set the background color */
 body {
   background-color: #3d3d3d;
-  color: white;
-  font-family: sans-serif;
+  margin: 0;
 }
 
-header {
+/* style the top bar */
+.top-bar {
   background-color: #272727;
-  padding: 10px;
+  color: white;
+  font-size: 18px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
-header h1 {
-  font-family: 'Dancing Script', cursive;
+.title {
   font-size: 52px;
+  font-family: 'Dancing Script', cursive;
   color: yellow;
-  margin: 0;
 }
 
-header ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.menu {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 }
 
-header ul li {
-  margin-right: 10px;
+.menu-item {
   font-size: 40px;
-  font-weight: bold;
-}
-
-header ul li:first-child {
-  color: yellow;
-}
-
-header ul li.hidden {
-  display: none;
-}
-
-header .plus-sign {
+  font-family: sans-serif;
+  color: white;
+  margin-left: 20px;
   cursor: pointer;
 }
 
-.content {
-  padding: 20px;
+.menu-item.yellow {
+  color: yellow;
 }
 
-/* Media query to hide nav links on smaller screens */
-@media (max-width: 600px) {
-  header ul {
+.menu-item-more {
+  font-size: 40px;
+  font-family: sans-serif;
+  color: white;
+  margin-left: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.menu-more {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* show menu more when there's not enough space */
+@media screen and (max-width: 600px) {
+  .menu-item-more {
+    display: block;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+  }
+
+  .menu-item:not(:first-child) {
     display: none;
   }
-  
-  header .plus-sign {
+
+  .menu-more {
     display: block;
   }
-  
-  header ul li.hidden {
+
+  .menu-more .menu-item {
     display: block;
+    margin: 5px 0;
   }
 }
