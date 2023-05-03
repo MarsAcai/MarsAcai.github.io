@@ -1,66 +1,67 @@
-
 body {
   background-color: #3d3d3d;
+  color: white;
+  font-family: sans-serif;
+}
+
+header {
+  background-color: #272727;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 52px;
+  color: yellow;
+  margin: 0;
+}
+
+header ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-}
-
-.top-bar {
-  background-color: #272727;
-  color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  justify-content: flex-end;
 }
 
-.title {
-  font-size: 52px;
-  font-family: 'Dancing Script', cursive;
-  color: yellow;
-}
-
-.menu {
-  display: flex;
-  gap: 20px;
-}
-
-.menu a {
+header ul li {
+  margin-right: 10px;
   font-size: 40px;
-  font-family: sans-serif;
-  color: #fff;
-  text-decoration: none;
+  font-weight: bold;
 }
 
-.menu a.active,
-.menu a:hover {
+header ul li:first-child {
   color: yellow;
 }
 
-.menu-toggle {
+header ul li.hidden {
   display: none;
-  font-size: 40px;
-  color: #fff;
+}
+
+header .plus-sign {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .menu {
-    display: none;
-  }
-  .menu-toggle {
-    display: block;
-  }
-  .content {
-    padding-top: 100px;
-  }
-  .menu-toggle.active span:before {
-    content: '-';
-  }
+.content {
+  padding: 20px;
 }
 
-@media screen and (min-width: 769px) {
-  .menu-toggle {
+/* Media query to hide nav links on smaller screens */
+@media (max-width: 600px) {
+  header ul {
     display: none;
+  }
+  
+  header .plus-sign {
+    display: block;
+  }
+  
+  header ul li.hidden {
+    display: block;
   }
 }
