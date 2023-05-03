@@ -65,27 +65,21 @@
 		.gallery {
 			display: flex;
 			flex-wrap: wrap;
-			flex-direction: row;
 			margin: 10px -10px;
-			height: 511px; /* set the height of the container */
+			height: 300px; /* set the height of the container */
 		}
 		.gallery-item {
-			width: calc(33.33% - 20px);
+			width: calc(25% - 20px);
 			margin: 10px;
 			flex-grow: 1; /* make each image take up equal space */
 			height: 100%; /* fill the height of the container */
-			object-fit: contain; /* maintain aspect ratio and fit within container */
-			position: absolute;
+			object-fit: cover; /* maintain aspect ratio and fill the height of the container */
 		}
 		.gallery-item img {
 			display: block;
 			width: 100%;
 			height: auto;
 			cursor: pointer;
-			flex-grow: 1; /* make each image take up equal space */
-			height: 100%; /* fill the height of the container */
-			object-fit: contain; /* maintain aspect ratio and fit within container */
-			position: absolute;
 		}
 		.modal {
 			display: none;
