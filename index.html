@@ -1,97 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Mars Acai</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #3d3d3d;
       margin: 0;
-      padding: 0;
-      font-family: sans-serif;
     }
 
     #top-bar {
       background-color: #272727;
-      color: yellow;
-      font-family: 'Dancing Script', cursive;
-      font-size: 52px;
-      padding: 20px;
-    }
-
-    #top-bar span {
-      color: white;
-    }
-
-    #top-bar .menu {
-      display: none;
-    }
-
-    #top-bar .menu-toggle {
-      color: white;
-      font-size: 40px;
-      cursor: pointer;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-
-    #top-bar .menu-toggle:hover {
-      color: yellow;
-    }
-
-    #top-bar .menu-items {
+      height: 60px;
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-      color: white;
-      font-size: 40px;
-      padding: 20px;
+      align-items: center;
+      padding: 0 20px;
     }
 
-    #top-bar .menu-items li {
-      margin-right: 20px;
-      cursor: pointer;
-    }
-
-    #top-bar .menu-items li:hover {
+    #title {
+      font-size: 52px;
+      font-style: italic;
       color: yellow;
+      font-family: sans-serif;
+      margin: 0;
     }
 
-    #top-bar .menu-items .active {
+    #nav {
+      font-size: 40px;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      color: white;
+    }
+
+    #nav a:first-child {
       color: yellow;
     }
   </style>
 </head>
 <body>
   <div id="top-bar">
-    Mars Acai <span>Home / Sculptures / Drawings / Digital Art / Characters / About</span>
-    <div class="menu-toggle">&#43;</div>
-    <ul class="menu-items">
-      <li class="active">Home</li>
-      <li>Sculptures</li>
-      <li>Drawings</li>
-      <li>Digital Art</li>
-      <li>Characters</li>
-      <li>About</li>
-    </ul>
+    <h1 id="title">Mars Acai</h1>
   </div>
 
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuItems = document.querySelector('.menu-items');
-
-    menuToggle.addEventListener('click', () => {
-      if (menuItems.style.display === 'flex') {
-        menuItems.style.display = 'none';
-      } else {
-        menuItems.style.display = 'flex';
-      }
-    });
-  </script>
+  <div id="nav">
+    <a href="#">Home</a>
+    <a href="#">Sculptures</a>
+    <a href="#">Drawings</a>
+    <a href="#">Digital Art</a>
+    <a href="#">Characters</a>
+    <a href="#">About</a>
+  </div>
 </body>
 </html>
