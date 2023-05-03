@@ -1,153 +1,99 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Mars Acai</title>
-	<style>
-		body {
-			background-color: #7f7f7f; /* medium grey background */
-			font-family: sans-serif; /* sans-serif font */
-		}
-
-		.topbar {
-			background-color: #333333; /* dark grey top bar */
-			color: #ffff00; /* yellow title font */
-			font-style: italic; /* italic title font */
-			padding: 10px;
-			text-align: center;
-		}
-
-		.topbar h1 {
-			margin: 0;
-			font-size: 52px;
-		}
-
-		.navbar {
-			background-color: #333333; /* dark grey navigation bar */
-			color: #ffffff; /* white navigation links */
-			padding: 10px;
-			text-align: center;
-			font-size: 40px;
-		}
-
-		.navbar a {
-			display: inline-block;
-			padding: 10px;
-			color: #ffffff; /* white navigation links */
-			text-decoration: none;
-			margin: 0 20px; /* add some space between the links */
-		}
-
-		.navbar a:hover {
-			background-color: #666666; /* dark grey background on hover */
-		}
-
-		.navbar a.active {
-			color: #ffff00; /* yellow color on active */
-		}
-		</style>
-		
-		<title>Gallery</title>
-	<style>
-		.gallery {
-			display: flex;
-			flex-wrap: wrap;
-			margin: 10px -10px;
-		}
-		.gallery-item {
-			width: calc(25% - 20px);
-			margin: 10px;
-		}
-		.gallery-item img {
-			display: block;
-			width: 100%;
-			height: auto;
-			cursor: pointer;
-		}
-		.modal {
-			    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: none;;
-		}
-		.modal-content {
-			display: block;
-			margin: auto;
-			max-width: 90%;
-			max-height: 90%;
-		}
-		.modal-content img {
-			display: block;
-			width: 100%;
-			height: auto;
-		}
-		.close {
-			position: absolute;
-			top: 0;
-			right: 0;
-			padding: 10px;
-			color: white;
-			font-size: 30px;
-			font-weight: bold;
-			cursor: pointer;
-		}
-	</style>
-</head>
-<body>
-	<div class="topbar">
-		<h1>Mars Acai</h1>
-	</div>
-	<div class="navbar">
-		<a href="#" class="active" style="color:#ffff00;">Home</a>
-		<a href="sculptures.html">Sculptures</a>
-		<a href="drawings.html">Drawings</a>
-		<a href="digitalart.html">Digital Art</a>
-		<a href="characters.html">Characters</a>
-		<a href="about.html">About</a>
-	</div>
-	<!-- Your page content goes here -->
-	
-	<div class="gallery">
-		<div class="gallery-item">
-			<img src="thumbnail1.jpg" onclick="showImage('image1.jpg')">
-		</div>
-		<div class="gallery-item">
-			<img src="thumbnail2.jpg" onclick="showImage('image2.jpg')">
-		</div>
-		<div class="gallery-item">
-			<img src="thumbnail3.jpg" onclick="showImage('image3.jpg')">
-		</div>
-		<div class="gallery-item">
-			<img src="thumbnail4.jpg" onclick="showImage('image4.jpg')">
-	</div>
-
-	<div id="myModal" class="modal">
-		<span class="close" onclick="closeModal()">&times;</span>
-		<img class="modal-content" id="modalImage">
-	</div>
-
-	<script>
-		var modal = document.getElementById("myModal");
-		var modalImg = document.getElementById("modalImage");
-
-		function showImage(src) {
-			modal.style.display = "block";
-			modalImg.src = src;
-		}
-
-		function closeModal() {
-			modal.style.display = "none";
-		}
-
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				closeModal();
-			}
-		}
-	</script>
-</body>
+  <head>
+    <title>Mars Acai</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="title">Mars Acai</div>
+        <div class="menu">
+          <a href="index.html" class="active">Home</a>
+          <a href="sculptures">Sculptures</a>
+          <a href="#">Drawings</a>
+          <a href="#">Digital Art</a>
+          <a href="#">Characters</a>
+          <a href="#">About</a>
+        </div>
+        <div class="menu-toggle">
+          <span>+</span>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <!-- your page content here -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 
+CSS code:
+
+css
+
+body {
+  background-color: #3d3d3d;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar {
+  background-color: #272727;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.title {
+  font-size: 52px;
+  font-family: 'Dancing Script', cursive;
+  color: yellow;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  font-size: 40px;
+  font-family: sans-serif;
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu a.active,
+.menu a:hover {
+  color: yellow;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .content {
+    padding-top: 100px;
+  }
+  .menu-toggle.active span:before {
+    content: '-';
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+}
