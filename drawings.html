@@ -65,11 +65,16 @@
 		.gallery {
 			display: flex;
 			flex-wrap: wrap;
+			flex-direction: row;
 			margin: 10px -10px;
+			height: 511px; /* set the height of the container */
 		}
 		.gallery-item {
 			width: calc(33.33% - 20px);
 			margin: 10px;
+			flex-grow: 1; /* make each image take up equal space */
+			height: 100%; /* fill the height of the container */
+			object-fit: contain; /* maintain aspect ratio and fit within container */
 		}
 		.gallery-item img {
 			display: block;
@@ -114,15 +119,6 @@
 			font-weight: bold;
 			cursor: pointer;
 		}
-		.gallery {
-			  display: flex;
-			  flex-direction: row;
-			  height: 511px; /* set the height of the container */
-			} 
-		.gallery-item {
-			  flex-grow: 1; /* make each image take up equal space */
-			  object-fit: contain; /* maintain aspect ratio and fit within container */
-			}
 	</style>
 </head>
 <body>
