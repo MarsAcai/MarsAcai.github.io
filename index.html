@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mars Acai</title>
-  <style>
-    body {
-      background-color: #3d3d3d;
-      margin: 0;
-    }
+	<title>Mars Acai</title>
+	<style>
+		body {
+			background-color: #3d3d3d; /* medium grey background */
+			font-family: sans-serif; /* sans-serif font */
+		}
 
-    #top-bar {
-      background-color: #272727;
-      height: 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-    }
+		.topbar {
+			background-color: #272727; /* dark grey top bar */
+			color: #ffff00; /* yellow title font */
+			font-style: italic; /* italic title font */
+			padding: 10px;
+			text-align: center;
+		}
 
-    #title {
-      font-size: 52px;
-      font-style: italic;
-      color: yellow;
-      font-family: sans-serif;
-      margin: 0;
-    }
+		.topbar h1 {
+			margin: 0;
+			font-size: 52px;
+		}
 
-    #nav {
-      font-size: 40px;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-      color: white;
-    }
+		.navbar {
+			background-color: #272727; /* dark grey navigation bar */
+			color: #ffffff; /* white navigation links */
+			padding: 10px;
+			text-align: center;
+			font-size: 40px;
+		}
 
-    #nav a:first-child {
-      color: yellow;
-    }
-  </style>
+		.navbar a {
+			display: inline-block;
+			padding: 10px;
+			color: #ffffff; /* white navigation links */
+			text-decoration: none;
+			margin: 0 20px; /* add some space between the links */
+		}
+
+		.navbar a:hover {
+			background-color: #666666; /* dark grey background on hover */
+		}
+
+		.navbar a.active {
+			color: #ffff00; /* yellow color on active */
+		}
+	</style>
 </head>
 <body>
-  <div id="top-bar">
-    <h1 id="title">Mars Acai</h1>
-  </div>
-
-  <div id="nav">
-    <a href="#">Home</a>
-    <a href="#">Sculptures</a>
-    <a href="#">Drawings</a>
-    <a href="#">Digital Art</a>
-    <a href="#">Characters</a>
-    <a href="#">About</a>
-  </div>
+	<div class="topbar">
+		<h1>Mars Acai</h1>
+	</div>
+	<div class="navbar">
+		<a href="#" class="active" style="color:#ffff00;">Home</a>
+		<a href="sculptures.html">Sculptures</a>
+		<a href="drawings.html">Drawings</a>
+		<a href="digitalart.html">Digital Art</a>
+		<a href="characters.html">Characters</a>
+		<a href="about.html">About</a>
+	</div>
+	<!-- Your page content goes here -->
 </body>
 </html>
