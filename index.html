@@ -1,33 +1,97 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Mars Acai</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
-  <body>
-    <div class="top-bar">
-      <div class="title">Mars Acai</div>
-      <div class="menu">
-        <div class="menu-item yellow">home</div>
-        <div class="menu-item">sculptures</div>
-        <div class="menu-item">drawings</div>
-        <div class="menu-item">digital art</div>
-        <div class="menu-item">characters</div>
-        <div class="menu-item">about</div>
-        <div class="menu-item-more">+</div>
-        <div class="menu-more">
-          <div class="menu-item yellow">home</div>
-          <div class="menu-item">sculptures</div>
-          <div class="menu-item">drawings</div>
-          <div class="menu-item">digital art</div>
-          <div class="menu-item">characters</div>
-          <div class="menu-item">about</div>
-        </div>
-      </div>
-    </div>
-    <div class="content">
-      <!-- add your content here -->
-    </div>
-    <script src="script.js"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mars Acai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #3d3d3d;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    #top-bar {
+      background-color: #272727;
+      color: yellow;
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      padding: 20px;
+    }
+
+    #top-bar span {
+      color: white;
+    }
+
+    #top-bar .menu {
+      display: none;
+    }
+
+    #top-bar .menu-toggle {
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    #top-bar .menu-toggle:hover {
+      color: yellow;
+    }
+
+    #top-bar .menu-items {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      color: white;
+      font-size: 40px;
+      padding: 20px;
+    }
+
+    #top-bar .menu-items li {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    #top-bar .menu-items li:hover {
+      color: yellow;
+    }
+
+    #top-bar .menu-items .active {
+      color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div id="top-bar">
+    Mars Acai <span>Home / Sculptures / Drawings / Digital Art / Characters / About</span>
+    <div class="menu-toggle">&#43;</div>
+    <ul class="menu-items">
+      <li class="active">Home</li>
+      <li>Sculptures</li>
+      <li>Drawings</li>
+      <li>Digital Art</li>
+      <li>Characters</li>
+      <li>About</li>
+    </ul>
+  </div>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuItems = document.querySelector('.menu-items');
+
+    menuToggle.addEventListener('click', () => {
+      if (menuItems.style.display === 'flex') {
+        menuItems.style.display = 'none';
+      } else {
+        menuItems.style.display = 'flex';
+      }
+    });
+  </script>
+</body>
 </html>
