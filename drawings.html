@@ -114,6 +114,15 @@
 			font-weight: bold;
 			cursor: pointer;
 		}
+		.gallery {
+			  display: flex;
+			  flex-direction: row;
+			  height: 511px; /* set the height of the container */
+			} 
+		.gallery-item {
+			  flex-grow: 1; /* make each image take up equal space */
+			  object-fit: contain; /* maintain aspect ratio and fit within container */
+			}
 	</style>
 </head>
 <body>
