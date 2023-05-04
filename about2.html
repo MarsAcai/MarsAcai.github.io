@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mars Acai</title>
 
+	
+	<style>	
+		
+		
+		body {
+			background-color: #3d3d3d; /* medium grey background */
+			font-family: sans-serif; /* sans-serif font */
+		}
+
+		.topbar {
+			background-color: #272727; /* dark grey top bar */
+			color: #ffff00; /* yellow title font */
+			font-style: italic; /* italic title font */
+			padding: 10px;
+			text-align: center;
+		}
+		
+		
+		.topbar h1 {
+			margin: 0;
+			font-size: 45px;
+		}
+
+		.navbar {
+			background-color: #272727; /* dark grey navigation bar */
+			color: #ffffff; /* white navigation links */
+			padding: 10px;
+			text-align: center;
+			font-size: 30px;
+		}
+
+		.navbar a {
+			display: inline-block;
+			padding: 10px;
+			color: #ffffff; /* white navigation links */
+			text-decoration: none;
+			margin: 0 15px; /* add some space between the links */
+		}
+
+		.navbar a:hover {
+			background-color: #666666; /* dark grey background on hover */
+		}
+
+		.navbar a.active {
+			color: #ffff00; /* yellow color on active */
+		}
+		
+	</style>
+  </head>
+  
+  <body>
+	<div class="topbar">
+		<h1>Mars Acai</h1>
+	</div>
+	<div class="navbar">
+		<a href="index.html">Home</a>
+		<a href="sculptures.html">Sculptures</a>
+		<a href="drawings.html">Drawings</a>
+		<a href="digitalart.html">Digital Art</a>
+		<a href="characters.html" >Characters</a>
+		<a href="javascript:randomlink()" class="active" style="color:#ffff00;" >About</a>
+	</div>
+                                                                                   
+                                                                                   <script>
+		var modal = document.getElementById("myModal");
+		var modalImg = document.getElementById("modalImage");
+
+		function showImage(src) {
+			modal.style.display = "block";
+			modalImg.src = src;
+		}
+
+		function closeModal() {
+			modal.style.display = "none";
+		}
+
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				closeModal();
+			}
+		}
+	</script>
+						    
+						    <script>
+                            <!--
+                            /*
+                            Random link button- By JavaScript Kit (http://javascriptkit.com)
+                            Over 300+ free scripts!
+                            This credit MUST stay intact for use
+                            */
+                            //specify random links below. You can have as many as you want
+                            var randomlinks=new Array()
+                            randomlinks[0]= "about1.html"
+                            randomlinks[1]= "about2.html"
+                            randomlinks[2]= "about3.html"
+                            function randomlink(){
+                            window.location=randomlinks[Math.floor(Math.random()*randomlinks.length)]
+                            }
+                            //-->
+                            </script>
+                            <!--Uncomment below to use a regular text link instead
+                            <a href="javascript:randomlink()">Random Link</a>
+                            -->
+						    
+	<!-- Your page content goes here -->
+	  
+	  
+</body>
+</html>
