@@ -1,1 +1,210 @@
-sculptures
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mars Acai</title>
+	
+	<meta charset="UTF-8">
+	<title>Mars Acai</title>
+	<script type="text/javascript">
+		// Redirect to mobile version if user is on a mobile device
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			window.location = "sculpturesmobile.html";
+		}
+	</script>
+	
+	<style>	
+		
+		
+		body {
+			background-color: #3d3d3d; /* medium grey background */
+			font-family: sans-serif; /* sans-serif font */
+		}
+
+		.topbar {
+			background-color: #272727; /* dark grey top bar */
+			color: #ffff00; /* yellow title font */
+			font-style: italic; /* italic title font */
+			padding: 10px;
+			text-align: center;
+		}
+		
+		
+		.topbar h1 {
+			margin: 0;
+			font-size: 45px;
+		}
+
+		.navbar {
+			background-color: #272727; /* dark grey navigation bar */
+			color: #ffffff; /* white navigation links */
+			padding: 10px;
+			text-align: center;
+			font-size: 30px;
+		}
+
+		.navbar a {
+			display: inline-block;
+			padding: 10px;
+			color: #ffffff; /* white navigation links */
+			text-decoration: none;
+			margin: 0 12px; /* add some space between the links */
+		}
+
+		.navbar a:hover {
+			background-color: #666666; /* dark grey background on hover */
+		}
+
+		.navbar a.active {
+			color: #ffff00; /* yellow color on active */
+		}
+		
+	</style>
+	
+	<title>Gallery</title>
+	<style>
+		.gallery {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 5px -10px;
+		}
+		.gallery-item {
+			width: calc(25% - 20px);
+			margin: 10px;
+		}
+		.gallery-item img {
+			display: block;
+			width: 100%;
+			height: auto;
+			cursor: pointer;
+		}
+		.modal {
+			display: none;
+			justify-content: center;
+  			align-items: center;
+			position: fixed;
+			z-index: 999;
+			top: 0%;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+		.modal-content {
+			display: block;
+			margin: auto;
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+			
+		}
+			
+		.modal-content img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+		.close {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 10px;
+			color: white;
+			font-size: 30px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="topbar">
+		<h1>Mars Acai</h1>
+	</div>
+	<div class="navbar">
+		<a href="index.html" >Home</a>
+		<a href="sculptures.html" class="active" style="color:#ffff00;>Sculptures</a>
+		<a href="drawings.html"">Drawings</a>
+		<a href="digitalart.html">Digital Art</a>
+		<a href="characters.html" >Characters</a>
+		<a href="about.html" >About</a>
+	</div>
+	
+<body>
+	<div class="gallery">
+		<div class="gallery-item">
+			<img src="sculptures/sculptwide2thumb.jpg" onclick="showImage('sculptures/sculptwide2.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptwide3thumb.jpg" onclick="showImage('sculptures/sculptwide3.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptwide4thumb.jpg" onclick="showImage('sculptures/sculptwide4.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptlong2thumb.jpg" onclick="showImage('sculptures/sculptlong2.jpg')">
+		</div>
+    <div class="gallery-item">
+			<img src="sculptures/sculptlong1thumb.jpg" onclick="showImage('sculptures/sculptlong1.jpg')">
+		</div>
+    <div class="gallery-item">
+			<img src="sculptures/sculptsquare1thumb.jpg" onclick="showImage('sculptures/sculptsquare1.jpg')">
+		</div>
+    <div class="gallery-item">
+			<img src="sculptures/sculptwide1thumb.jpg" onclick="showImage('sculptures/sculptwide1.jpg')">
+		</div>
+    <div class="gallery-item">
+			<img src="sculptures/sculptsquare2thumb.jpg" onclick="showImage('sculptures/sculptsquare2.jpg')">
+		</div>
+     <div class="gallery-item">
+			<img src="sculptures/sculptsquare3thumb.jpg" onclick="showImage('sculptures/sculptsquare3.jpg')">
+		</div>
+     <div class="gallery-item">
+			<img src="sculptures/sculptsquare4thumb.jpg" onclick="showImage('sculptures/sculptsquare4.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptlong3thumb.jpg" onclick="showImage('sculptures/sculptlong3.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptwide5thumb.jpg" onclick="showImage('sculptures/sculptwide5.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptlong5thumb.jpg" onclick="showImage('sculptures/sculptlong5.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptlong4thumb.jpg" onclick="showImage('sculptures/sculptlong4.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptwide6thumb.jpg" onclick="showImage('sculptures/sculptwide6.jpg')">
+		</div>
+    	<div class="gallery-item">
+			<img src="sculptures/sculptwide7thumb.jpg" onclick="showImage('sculptures/sculptwide7.jpg')">
+		</div>
+	</div>
+
+	<div id="myModal" class="modal">
+		<span class="close" onclick="closeModal()">&times;</span>
+		<img class="modal-content" id="modalImage">
+	</div>
+
+	<script>
+		var modal = document.getElementById("myModal");
+		var modalImg = document.getElementById("modalImage");
+
+		function showImage(src) {
+			modal.style.display = "block";
+			modalImg.src = src;
+		}
+
+		function closeModal() {
+			modal.style.display = "none";
+		}
+
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				closeModal();
+			}
+		}
+	</script>
+	<!-- Your page content goes here -->
+</body>
+</html>
