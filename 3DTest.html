@@ -1,93 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mars Acai</title>
-	
-	<meta charset="UTF-8">
-	<title>Mars Acai</title>
-	<script type="text/javascript">
-		// Redirect to mobile version if user is on a mobile device
-		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-			window.location = "mobile.html";
-		}
+  <style>
+    #container {
+      position: relative;
+    }
 
-		// Image gallery functionality
-		var images = ["3DTest/3D1.png", "3DTest/3D2.png", "3DTest/3D3.png", "3DTest/3D4.png", "3DTest/3D5.png", "3DTest/3D6.png", "3DTest/3D7.png", "3DTest/3D8.png", "3DTest/3D9.png", "3DTest/3D10.png"]; // Add the file names of your images here
-		var currentIndex = 0;
-		var imgElement;
-		var isDragging = false;
-		var isClicked = false;
-		var startX = 0;
-		var thresholdNext = 150; // Adjust this value to increase/decrease the dragging distance required to move to the next image
-		var thresholdPrev = 100; // Adjust this value to increase/decrease the dragging distance required to move to the previous image
-
-		function displayImage(index) {
-			if (index >= 0 && index < images.length) {
-				imgElement.src = images[index];
-				currentIndex = index;
-			}
-		}
-
-		function handleImageMouseDown(event) {
-			isClicked = true;
-			startX = event.clientX;
-		}
-
-		function handleImageMouseMove(event) {
-			if (isClicked && isDragging) {
-				var deltaX = event.clientX - startX;
-
-				if (deltaX < -thresholdNext && currentIndex < images.length - 1) {
-					displayImage(currentIndex + 1);
-					startX = event.clientX;
-				} else if (deltaX > thresholdPrev && currentIndex > 0) {
-					displayImage(currentIndex - 1);
-					startX = event.clientX;
-				}
-			}
-		}
-
-		function handleImageMouseUp() {
-			isClicked = false;
-		}
-
-		function handleImageDragStart(event) {
-			isDragging = true;
-		}
-
-		function handleImageDragEnd() {
-			isDragging = false;
-		}
-
-		document.addEventListener("DOMContentLoaded", function() {
-			imgElement = document.getElementById("gallery-image");
-			imgElement.addEventListener("mousedown", handleImageMouseDown);
-			imgElement.addEventListener("mousemove", handleImageMouseMove);
-			imgElement.addEventListener("mouseup", handleImageMouseUp);
-			imgElement.addEventListener("dragstart", handleImageDragStart);
-			imgElement.addEventListener("dragend", handleImageDragEnd);
-			displayImage(currentIndex);
-		});
-	</script>
-	
-	<style>	
-		/* CSS styles go here */
-	</style>
+    #second-image {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
 </head>
 <body>
-	<div class="topbar">
-		<h1>Mars Acai</h1>
-	</div>
-	<div class="navbar">
-		<a href="index.html">Home</a>
-		<a href="sculptures.html">Sculptures</a>
-		<a href="drawings.html">Drawings</a>
-		<a href="digitalart.html">Digital Art</a>
-		<a href="characters.html">Characters</a>
-		<a href="3DTest.html" class="active" style="color:#ffff00;">About</a>
-	</div>
+  <div id="container">
+    <img id="first-image" src="3DTest/3D1.png" alt="First Image" draggable="false">
+    <img id="second-image" src="3DTest/3D2.png" alt="Second Image" draggable="false">
+  </div>
 
-	<!-- Displayed image -->
-	<img id="gallery-image" src="" alt="Gallery Image" draggable="false">
+  <script>
+    var container = document.getElementById('container');
+    var secondImage = document.getElementById('second-image');
+
+    container.addEventListener('mousedown', function(event) {
+      var startX = event.clientX;
+      
+      container.addEventListener('mousemove', onMouseMove);
+      container.addEventListener('mouseup', onMouseUp);
+      
+      function onMouseMove(event) {
+        var currentX = event.clientX;
+        var distance = currentX - startX;
+        
+        if (distance > 0) {
+          secondImage.style.display = 'block';
+        } else {
+          secondImage.style.display = 'none';
+        }
+      }
+      
+      function onMouseUp(event) {
+        container.removeEventListener('mousemove', onMouseMove);
+        container.removeEventListener('mouseup', onMouseUp);
+      }
+    });
+  </script>
 </body>
 </html>
