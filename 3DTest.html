@@ -59,27 +59,27 @@
 		}
 		
 	</style>
-	
-<title>Image Slider Plugin</title>
-  <style>
-  #slider {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  position: relative;
-}
 
-#slider img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  object-fit: contain;
-}
+	 <title>Image Slider</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #slider {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
   </style>
   
   </head>
@@ -109,72 +109,38 @@
     <img src="3DTest/3D10.png">
   </div>
 	
-	 <script>
-    // Get the slider container element
+  <script>
     const slider = document.getElementById('slider');
-
-    // Initialize variables
-    let isDragging = false;
-    let startPos = 0;
-    let currentTranslate = 0;
-    let previousTranslate = 0;
+    let startX;
     let currentIndex = 0;
 
-    // Attach event listeners
     slider.addEventListener('mousedown', dragStart);
     slider.addEventListener('touchstart', dragStart);
     slider.addEventListener('mouseup', dragEnd);
     slider.addEventListener('touchend', dragEnd);
-    slider.addEventListener('mousemove', drag);
-    slider.addEventListener('touchmove', drag);
 
-    // Handle mouse/touch events
     function dragStart(event) {
+      startX = getPositionX(event);
       event.preventDefault();
-      startPos = getPositionX(event);
-      isDragging = true;
     }
 
-    function drag(event) {
-      if (isDragging) {
-        const currentPosition = getPositionX(event);
-        currentTranslate = previousTranslate + currentPosition - startPos;
-      }
-    }
-
-    function dragEnd() {
-      isDragging = false;
-
-      // Check if the currentTranslate exceeds a threshold to determine the next image
-      if (currentTranslate < -50 && currentIndex < slider.children.length - 1) {
+    function dragEnd(event) {
+      const endX = getPositionX(event);
+      if (startX - endX > 100 && currentIndex < slider.children.length - 1) {
         currentIndex++;
-      } else if (currentTranslate > 50 && currentIndex > 0) {
+      } else if (endX - startX > 100 && currentIndex > 0) {
         currentIndex--;
       }
-
-      // Transition to the next image
-      setPositionByIndex();
+      translateSlider();
     }
 
     function getPositionX(event) {
       return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
     }
 
-    function setPositionByIndex() {
-      currentTranslate = currentIndex * -100;
-      previousTranslate = currentTranslate;
-
-      // Apply the translation to the slider
-      slider.style.transform = `translateX(${currentTranslate}%)`;
-
-      // Update image opacity
-      Array.from(slider.children).forEach((child, index) => {
-        if (index === currentIndex) {
-          child.style.opacity = 1;
-        } else {
-          child.style.opacity = 0;
-        }
-      });
+    function translateSlider() {
+      const translateXValue = -currentIndex * 100;
+      slider.style.transform = `translateX(${translateXValue}vw)`;
     }
   </script>
 						    
