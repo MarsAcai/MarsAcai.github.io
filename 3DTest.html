@@ -12,9 +12,11 @@
 		}
 
 		// Image gallery functionality
-		var images = ["3DTest/3D1.png", "3DTest/3D2.png", "3DTest/3D3.png", "3DTest/3D4.png", "3DTest/3D5.png" ]; // Add the file names of your images here
+		var images = ["3DTest/3D1.png", "3DTest/3D2.png", "3DTest/3D3.png", "3DTest/3D4.png", "3DTest/3D5.png"]; // Add the file names of your images here
 		var currentIndex = 0;
 		var imgElement;
+		var isDragging = false;
+		var startX = 0;
 
 		function displayImage(index) {
 			if (index >= 0 && index < images.length) {
@@ -23,24 +25,27 @@
 			}
 		}
 
-		function handleImageDrag(event) {
-			var delta = event.clientX - event.dataTransfer.getData("mouseX");
+		function handleImageDragStart(event) {
+			isDragging = true;
+			startX = event.clientX;
+		}
 
-			if (delta < 0 && currentIndex < images.length - 1) {
+		function handleImageDragEnd(event) {
+			isDragging = false;
+			var deltaX = event.clientX - startX;
+
+			if (deltaX < -50 && currentIndex < images.length - 1) {
 				displayImage(currentIndex + 1);
-			} else if (delta > 0 && currentIndex > 0) {
+			} else if (deltaX > 50 && currentIndex > 0) {
 				displayImage(currentIndex - 1);
 			}
 		}
 
-		function handleDragStart(event) {
-			event.dataTransfer.setData("mouseX", event.clientX);
-		}
-
 		document.addEventListener("DOMContentLoaded", function() {
 			imgElement = document.getElementById("gallery-image");
-			imgElement.addEventListener("dragstart", handleDragStart);
-			imgElement.addEventListener("dragend", handleImageDrag);
+			imgElement.addEventListener("mousedown", handleImageDragStart);
+			imgElement.addEventListener("mousemove", handleImageDragEnd);
+			imgElement.addEventListener("mouseup", handleImageDragEnd);
 			displayImage(currentIndex);
 		});
 	</script>
@@ -63,7 +68,7 @@
 	</div>
 
 	<!-- Displayed image -->
-	<img id="gallery-image" src="" alt="Gallery Image" draggable="true">
+	<img id="gallery-image" src="" alt="Gallery Image" draggable="false">
 </body>
 </html>
 
