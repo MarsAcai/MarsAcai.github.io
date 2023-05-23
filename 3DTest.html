@@ -125,8 +125,8 @@
     slider.addEventListener('touchstart', dragStart);
     slider.addEventListener('mouseup', dragEnd);
     slider.addEventListener('touchend', dragEnd);
-    slider.addEventListener('mousemove', drag);
-    slider.addEventListener('touchmove', drag);
+    document.addEventListener('mousemove', drag); // Changed this line
+    document.addEventListener('touchmove', drag);
 
     function dragStart(event) {
       if (event.type === 'touchstart') {
