@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mars Acai</title>
+	
+	<meta charset="UTF-8">
+	<title>Mars Acai</title>
+	<script type="text/javascript">
+		// Redirect to mobile version if user is on a mobile device
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			window.location = "mobile.html";
+		}
+	</script>
+	
+	<style>	
+		
+		
+		body {
+			background-color: #3d3d3d; /* medium grey background */
+			font-family: sans-serif; /* sans-serif font */
+		}
 
+		.topbar {
+			background-color: #272727; /* dark grey top bar */
+			color: #ffff00; /* yellow title font */
+			font-style: italic; /* italic title font */
+			padding: 10px;
+			text-align: center;
+		}
+		
+		
+		.topbar h1 {
+			margin: 0;
+			font-size: 45px;
+		}
+
+		.navbar {
+			background-color: #272727; /* dark grey navigation bar */
+			color: #ffffff; /* white navigation links */
+			padding: 10px;
+			text-align: center;
+			font-size: 30px;
+		}
+
+		.navbar a {
+			display: inline-block;
+			padding: 10px;
+			color: #ffffff; /* white navigation links */
+			text-decoration: none;
+			margin: 0 12px; /* add some space between the links */
+		}
+
+		.navbar a:hover {
+			background-color: #666666; /* dark grey background on hover */
+		}
+
+		.navbar a.active {
+			color: #ffff00; /* yellow color on active */
+		}
+		
+	</style>
+  
+  </head>
+<body>
+	<div class="topbar">
+		<h1>Mars Acai</h1>
+	</div>
+	<div class="navbar">
+		<a href="index.html" >Home</a>
+		<a href="sculptures.html">Sculptures</a>
+		<a href="drawings.html">Drawings</a>
+		<a href="digitalart.html">Digital Art</a>
+		<a href="characters.html" >Characters</a>
+		<a href="3DTest.html" class="active" style="color:#ffff00;">About</a>
+	</div>
+ 
+						    
+	<!-- Your page content goes here -->
+</body>
+</html>
