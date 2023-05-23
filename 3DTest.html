@@ -15,7 +15,7 @@
       position: relative;
     }
 
-    #second-image {
+    .image {
       display: none;
       position: absolute;
       left: 0;
@@ -25,31 +25,47 @@
 </head>
 <body>
   <div id="container">
-    <img id="first-image" src="3DTest/3D1.png" alt="First Image" draggable="false">
-    <img id="second-image" src="3DTest/3D2.png" alt="Second Image" draggable="false">
+    <img id="image" src="3DTest/3D1.png" alt="First Image" draggable="false">
+    <img id="image" src="3DTest/3D2.png" alt="Second Image" draggable="false">
+    <img id="image" src="3DTest/3D3.png" alt="Second Image" draggable="false">
   </div>
-
-  <script>
+  
+ <script>
     var container = document.getElementById('container');
-    var secondImage = document.getElementById('second-image');
+    var images = document.getElementsByClassName('image');
+    var currentIndex = 0;
 
     container.addEventListener('mousedown', function(event) {
       var startX = event.clientX;
-      
+
       container.addEventListener('mousemove', onMouseMove);
       container.addEventListener('mouseup', onMouseUp);
-      
+
       function onMouseMove(event) {
         var currentX = event.clientX;
         var distance = currentX - startX;
-        
+
         if (distance > 0) {
-          secondImage.style.display = 'block';
+          currentIndex++;
         } else {
-          secondImage.style.display = 'none';
+          currentIndex--;
+        }
+
+        if (currentIndex < 0) {
+          currentIndex = images.length - 1;
+        } else if (currentIndex >= images.length) {
+          currentIndex = 0;
+        }
+
+        for (var i = 0; i < images.length; i++) {
+          if (i === currentIndex) {
+            images[i].style.display = 'block';
+          } else {
+            images[i].style.display = 'none';
+          }
         }
       }
-      
+
       function onMouseUp(event) {
         container.removeEventListener('mousemove', onMouseMove);
         container.removeEventListener('mouseup', onMouseUp);
