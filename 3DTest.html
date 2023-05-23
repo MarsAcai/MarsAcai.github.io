@@ -60,7 +60,33 @@
 		
 	</style>
 
-	
+<title>Image Slider</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #slider {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .slide {
+      flex-shrink: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
   
   </head>
 <body>
@@ -75,6 +101,66 @@
 		<a href="characters.html" >Characters</a>
 		<a href="3DTest.html" class="active" style="color:#ffff00;">About</a>
 	</div>
+	
+	 <div id="slider">
+   		 <div class="slide"><img src="3DTest/3D1.png"></div>
+		<div class="slide"><img src="3DTest/3D2.png"></div>
+		 <div class="slide"><img src="3DTest/3D3.png"></div>
+		 <div class="slide"><img src="3DTest/3D4.png"></div>
+		 <div class="slide"><img src="3DTest/3D5.png"></div>
+		  <div class="slide"><img src="3DTest/3D6.png"></div>
+		<div class="slide"><img src="3DTest/3D7.png"></div>
+		 <div class="slide"><img src="3DTest/3D8.png"></div>
+		 <div class="slide"><img src="3DTest/3D9.png"></div>
+		 <div class="slide"><img src="3DTest/3D10.png"></div>
+  </div>
  
+<script>
+    const slider = document.getElementById('slider');
+    let isDragging = false;
+    let startPosition;
+    let currentIndex = 0;
+
+    slider.addEventListener('mousedown', dragStart);
+    slider.addEventListener('touchstart', dragStart);
+    slider.addEventListener('mouseup', dragEnd);
+    slider.addEventListener('touchend', dragEnd);
+    slider.addEventListener('mousemove', drag);
+    slider.addEventListener('touchmove', drag);
+
+    function dragStart(event) {
+      if (event.type === 'touchstart') {
+        startPosition = event.touches[0].clientX;
+      } else {
+        startPosition = event.clientX;
+        event.preventDefault();
+      }
+      isDragging = true;
+    }
+
+    function drag(event) {
+      if (isDragging) {
+        const currentPosition = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
+        const diff = currentPosition - startPosition;
+        slider.style.transform = `translateX(${-(currentIndex * 100 + (diff / window.innerWidth) * 100)}vw)`;
+      }
+    }
+
+    function dragEnd(event) {
+      if (isDragging) {
+        const endPosition = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
+        const diff = endPosition - startPosition;
+        const threshold = window.innerWidth / 3;
+        if (diff < -threshold && currentIndex < slider.children.length - 1) {
+          currentIndex++;
+        } else if (diff > threshold && currentIndex > 0) {
+          currentIndex--;
+        }
+        slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
+      }
+      isDragging = false;
+    }
+  </script>
+	
 </body>
 </html>
