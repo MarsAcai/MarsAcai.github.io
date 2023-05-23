@@ -59,8 +59,7 @@
 		}
 		
 	</style>
-
-<title>Image Slider</title>
+  <title>Image Slider</title>
   <style>
     body {
       margin: 0;
@@ -70,9 +69,8 @@
     #slider {
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       display: flex;
-      transition: transform 0.3s ease-in-out;
+      overflow: hidden;
     }
 
     .slide {
@@ -115,18 +113,20 @@
 		 <div class="slide"><img src="3DTest/3D10.png"></div>
   </div>
  
-<script>
+	
+  <script>
     const slider = document.getElementById('slider');
     let isDragging = false;
     let startPosition;
     let currentIndex = 0;
+    let translateX = 0;
 
     slider.addEventListener('mousedown', dragStart);
     slider.addEventListener('touchstart', dragStart);
     slider.addEventListener('mouseup', dragEnd);
     slider.addEventListener('touchend', dragEnd);
-    document.addEventListener('mousemove', drag); // Changed this line
-    document.addEventListener('touchmove', drag);
+    slider.addEventListener('mousemove', drag);
+    slider.addEventListener('touchmove', drag);
 
     function dragStart(event) {
       if (event.type === 'touchstart') {
@@ -142,21 +142,22 @@
       if (isDragging) {
         const currentPosition = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
         const diff = currentPosition - startPosition;
-        slider.style.transform = `translateX(${-(currentIndex * 100 + (diff / window.innerWidth) * 100)}vw)`;
+        translateX = -currentIndex * slider.offsetWidth + diff;
+        slider.style.transform = `translateX(${translateX}px)`;
       }
     }
 
-    function dragEnd(event) {
+    function dragEnd() {
       if (isDragging) {
-        const endPosition = event.type === 'touchend' ? event.changedTouches[0].clientX : event.clientX;
-        const diff = endPosition - startPosition;
-        const threshold = window.innerWidth / 3;
-        if (diff < -threshold && currentIndex < slider.children.length - 1) {
-          currentIndex++;
-        } else if (diff > threshold && currentIndex > 0) {
-          currentIndex--;
+        if (Math.abs(translateX) > slider.offsetWidth / 3) {
+          if (translateX > 0 && currentIndex > 0) {
+            currentIndex--;
+          } else if (translateX < 0 && currentIndex < slider.children.length - 1) {
+            currentIndex++;
+          }
         }
-        slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
+        translateX = -currentIndex * slider.offsetWidth;
+        slider.style.transform = `translateX(${translateX}px)`;
       }
       isDragging = false;
     }
