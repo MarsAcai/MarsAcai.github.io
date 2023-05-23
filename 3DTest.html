@@ -16,8 +16,10 @@
 		var currentIndex = 0;
 		var imgElement;
 		var isDragging = false;
+		var isClicked = false;
 		var startX = 0;
-		var threshold = 1000; // Adjust this value to increase/decrease the dragging distance required to change the image
+		var thresholdNext = 150; // Adjust this value to increase/decrease the dragging distance required to move to the next image
+		var thresholdPrev = 100; // Adjust this value to increase/decrease the dragging distance required to move to the previous image
 
 		function displayImage(index) {
 			if (index >= 0 && index < images.length) {
@@ -26,27 +28,44 @@
 			}
 		}
 
-		function handleImageDragStart(event) {
-			isDragging = true;
+		function handleImageMouseDown(event) {
+			isClicked = true;
 			startX = event.clientX;
 		}
 
-		function handleImageDragEnd(event) {
-			isDragging = false;
-			var deltaX = event.clientX - startX;
+		function handleImageMouseMove(event) {
+			if (isClicked && isDragging) {
+				var deltaX = event.clientX - startX;
 
-			if (deltaX < -50 && currentIndex < images.length - 1) {
-				displayImage(currentIndex + 1);
-			} else if (deltaX > 50 && currentIndex > 0) {
-				displayImage(currentIndex - 1);
+				if (deltaX < -thresholdNext && currentIndex < images.length - 1) {
+					displayImage(currentIndex + 1);
+					startX = event.clientX;
+				} else if (deltaX > thresholdPrev && currentIndex > 0) {
+					displayImage(currentIndex - 1);
+					startX = event.clientX;
+				}
 			}
+		}
+
+		function handleImageMouseUp() {
+			isClicked = false;
+		}
+
+		function handleImageDragStart(event) {
+			isDragging = true;
+		}
+
+		function handleImageDragEnd() {
+			isDragging = false;
 		}
 
 		document.addEventListener("DOMContentLoaded", function() {
 			imgElement = document.getElementById("gallery-image");
-			imgElement.addEventListener("mousedown", handleImageDragStart);
-			imgElement.addEventListener("mousemove", handleImageDragEnd);
-			imgElement.addEventListener("mouseup", handleImageDragEnd);
+			imgElement.addEventListener("mousedown", handleImageMouseDown);
+			imgElement.addEventListener("mousemove", handleImageMouseMove);
+			imgElement.addEventListener("mouseup", handleImageMouseUp);
+			imgElement.addEventListener("dragstart", handleImageDragStart);
+			imgElement.addEventListener("dragend", handleImageDragEnd);
 			displayImage(currentIndex);
 		});
 	</script>
@@ -72,4 +91,3 @@
 	<img id="gallery-image" src="" alt="Gallery Image" draggable="false">
 </body>
 </html>
-
