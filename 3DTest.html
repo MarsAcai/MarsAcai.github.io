@@ -107,37 +107,15 @@
       }
     }
 
-   // Event listener for the previous button
-const prevBtn = document.getElementById("prevBtn");
-prevBtn.addEventListener("mousedown", function() {
-  startContinuousSwitching(false);
-});
-prevBtn.addEventListener("mouseenter", function() {
-  if (isHolding) {
-    prevBtn.style.backgroundColor = "#666666";
-  }
-});
-prevBtn.addEventListener("mouseleave", function() {
-  if (isHolding) {
-    prevBtn.style.backgroundColor = "#272727";
-  }
-});
+    // Event listener for the previous button
+    document.getElementById("prevBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(false);
+    });
 
-// Event listener for the next button
-const nextBtn = document.getElementById("nextBtn");
-nextBtn.addEventListener("mousedown", function() {
-  startContinuousSwitching(true);
-});
-nextBtn.addEventListener("mouseenter", function() {
-  if (isHolding) {
-    nextBtn.style.backgroundColor = "#666666";
-  }
-});
-nextBtn.addEventListener("mouseleave", function() {
-  if (isHolding) {
-    nextBtn.style.backgroundColor = "#272727";
-  }
-});
+    // Event listener for the next button
+    document.getElementById("nextBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(true);
+    });
 
     // Event listener to stop continuous image switching when the mouse button is released
     document.addEventListener("mouseup", stopContinuousSwitching);
@@ -157,73 +135,9 @@ nextBtn.addEventListener("mouseleave", function() {
         stopContinuousSwitching();
       }
     });
-    
-    // Event listener for the previous button
-const prevBtn = document.getElementById("prevBtn");
-prevBtn.addEventListener("mousedown", function() {
-  startContinuousSwitching(false);
-});
-prevBtn.addEventListener("mouseover", function() {
-  if (isHolding) {
-    prevBtn.style.backgroundColor = "#666666";
-  }
-});
-prevBtn.addEventListener("mouseout", function() {
-  if (isHolding) {
-    prevBtn.style.backgroundColor = "#272727";
-  }
-});
-
-// Event listener for the next button
-const nextBtn = document.getElementById("nextBtn");
-nextBtn.addEventListener("mousedown", function() {
-  startContinuousSwitching(true);
-});
-nextBtn.addEventListener("mouseover", function() {
-  if (isHolding) {
-    nextBtn.style.backgroundColor = "#666666";
-  }
-});
-nextBtn.addEventListener("mouseout", function() {
-  if (isHolding) {
-    nextBtn.style.backgroundColor = "#272727";
-  }
-});
-
-// Event listener to stop continuous image switching when the mouse button is released
-document.addEventListener("mouseup", function() {
-  prevBtn.style.backgroundColor = "#272727";
-  nextBtn.style.backgroundColor = "#272727";
-  stopContinuousSwitching();
-});
-
-// Event listener for arrow key presses
-document.addEventListener("keydown", function(event) {
-  if (event.key === "ArrowLeft") {
-    startContinuousSwitching(false);
-    prevBtn.style.backgroundColor = "#666666";
-  } else if (event.key === "ArrowRight") {
-    startContinuousSwitching(true);
-    nextBtn.style.backgroundColor = "#666666";
-  }
-});
-
-// Event listener for arrow key releases
-document.addEventListener("keyup", function(event) {
-  if (event.key === "ArrowLeft") {
-    prevBtn.style.backgroundColor = "#272727";
-  } else if (event.key === "ArrowRight") {
-    nextBtn.style.backgroundColor = "#272727";
-  }
-  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-    stopContinuousSwitching();
-  }
-});
 
     // Initial display of the first image
     displayImage();
   </script>
-  
-  
 </body>
 </html>
