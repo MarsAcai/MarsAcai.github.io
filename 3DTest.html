@@ -107,15 +107,37 @@
       }
     }
 
-    // Event listener for the previous button
-    document.getElementById("prevBtn").addEventListener("mousedown", function() {
-      startContinuousSwitching(false);
-    });
+   // Event listener for the previous button
+const prevBtn = document.getElementById("prevBtn");
+prevBtn.addEventListener("mousedown", function() {
+  startContinuousSwitching(false);
+});
+prevBtn.addEventListener("mouseenter", function() {
+  if (isHolding) {
+    prevBtn.style.backgroundColor = "#666666";
+  }
+});
+prevBtn.addEventListener("mouseleave", function() {
+  if (isHolding) {
+    prevBtn.style.backgroundColor = "#272727";
+  }
+});
 
-    // Event listener for the next button
-    document.getElementById("nextBtn").addEventListener("mousedown", function() {
-      startContinuousSwitching(true);
-    });
+// Event listener for the next button
+const nextBtn = document.getElementById("nextBtn");
+nextBtn.addEventListener("mousedown", function() {
+  startContinuousSwitching(true);
+});
+nextBtn.addEventListener("mouseenter", function() {
+  if (isHolding) {
+    nextBtn.style.backgroundColor = "#666666";
+  }
+});
+nextBtn.addEventListener("mouseleave", function() {
+  if (isHolding) {
+    nextBtn.style.backgroundColor = "#272727";
+  }
+});
 
     // Event listener to stop continuous image switching when the mouse button is released
     document.addEventListener("mouseup", stopContinuousSwitching);
