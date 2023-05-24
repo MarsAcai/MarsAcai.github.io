@@ -45,6 +45,20 @@
       "3DTest/3D9.png",
       "3DTest/3D10.png",
     ];
+    
+    // Array of image URLs (high-resolution versions)
+const highResImageUrls = [
+  "3DTest/3D1high.png",
+  "3DTest/3D2high.png",
+  "3DTest/3D3high.png",
+  "3DTest/3D4high.png",
+  "3DTest/3D5high.png",
+  "3DTest/3D6high.png",
+  "3DTest/3D7high.png",
+  "3DTest/3D8high.png",
+  "3DTest/3D9high.png",
+  "3DTest/3D10high.png",
+];
 
     // Current index of the displayed image
     let currentIndex = 0;
@@ -57,6 +71,56 @@
       const imageDisplay = document.getElementById("imageDisplay");
       imageDisplay.src = imageUrls[currentIndex];
     }
+    
+    
+// Function to switch images based on direction
+function switchImage(isNext) {
+  const currentImageUrl = imageUrls[currentIndex];
+  const currentHighResImageUrl = highResImageUrls[currentIndex];
+
+  if (isNext) {
+    currentIndex++;
+    if (currentIndex >= imageUrls.length) {
+      currentIndex = 0;
+    }
+  } else {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = imageUrls.length - 1;
+    }
+  }
+
+  const nextImageUrl = imageUrls[currentIndex];
+  const nextHighResImageUrl = highResImageUrls[currentIndex];
+
+  if (isHighResMode) {
+    displayImage(nextHighResImageUrl);
+  } else {
+    displayImage(nextImageUrl);
+  }
+}
+
+// Event listener for arrow key presses
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowLeft") {
+    startContinuousSwitching(false);
+  } else if (event.key === "ArrowRight") {
+    startContinuousSwitching(true);
+  } else if (event.key === "ArrowUp") {
+    toggleHighResMode(true);
+  } else if (event.key === "ArrowDown") {
+    toggleHighResMode(false);
+  }
+});
+
+// Function to toggle high-resolution mode
+let isHighResMode = false;
+
+function toggleHighResMode(enableHighRes) {
+  isHighResMode = enableHighRes;
+  const imageUrl = isHighResMode ? highResImageUrls[currentIndex] : imageUrls[currentIndex];
+  displayImage(imageUrl);
+}
 
     // Function to switch to the next image
     function switchToNextImage() {
