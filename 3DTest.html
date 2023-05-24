@@ -8,6 +8,16 @@
       height: auto;
     }
   </style>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Viewer</title>
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
   <div>
@@ -33,6 +43,9 @@
 
     // Current index of the displayed image
     let currentIndex = 0;
+    let intervalId = null;
+    let delayTimeoutId = null;
+    let isHolding = false;
 
     // Display the image at the current index
     function displayImage() {
@@ -40,38 +53,64 @@
       imageDisplay.src = imageUrls[currentIndex];
     }
 
-    // Event listener for the previous button
-    document.getElementById("prevBtn").addEventListener("click", function() {
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = imageUrls.length - 1;
+    // Function to handle continuous image switching
+    function startContinuousSwitching(isNext) {
+      if (!isHolding) {
+        isHolding = true;
+        delayTimeoutId = setTimeout(function() {
+          intervalId = setInterval(function() {
+            if (isNext) {
+              currentIndex++;
+              if (currentIndex >= imageUrls.length) {
+                currentIndex = 0;
+              }
+            } else {
+              currentIndex--;
+              if (currentIndex < 0) {
+                currentIndex = imageUrls.length - 1;
+              }
+            }
+            displayImage();
+          }, 500);
+        }, 500);
       }
-      displayImage();
+    }
+
+    // Function to stop continuous image switching
+    function stopContinuousSwitching() {
+      if (isHolding) {
+        clearTimeout(delayTimeoutId);
+        clearInterval(intervalId);
+        isHolding = false;
+      }
+    }
+
+    // Event listener for the previous button
+    document.getElementById("prevBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(false);
     });
 
     // Event listener for the next button
-    document.getElementById("nextBtn").addEventListener("click", function() {
-      currentIndex++;
-      if (currentIndex >= imageUrls.length) {
-        currentIndex = 0;
-      }
-      displayImage();
+    document.getElementById("nextBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(true);
     });
+
+    // Event listener to stop continuous image switching when the mouse button is released
+    document.addEventListener("mouseup", stopContinuousSwitching);
 
     // Event listener for arrow key presses
     document.addEventListener("keydown", function(event) {
       if (event.key === "ArrowLeft") {
-        currentIndex--;
-        if (currentIndex < 0) {
-          currentIndex = imageUrls.length - 1;
-        }
-        displayImage();
+        startContinuousSwitching(false);
       } else if (event.key === "ArrowRight") {
-        currentIndex++;
-        if (currentIndex >= imageUrls.length) {
-          currentIndex = 0;
-        }
-        displayImage();
+        startContinuousSwitching(true);
+      }
+    });
+
+    // Event listener for arrow key releases
+    document.addEventListener("keyup", function(event) {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        stopContinuousSwitching();
       }
     });
 
@@ -80,3 +119,4 @@
   </script>
 </body>
 </html>
+
