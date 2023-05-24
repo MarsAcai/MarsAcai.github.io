@@ -35,6 +35,7 @@
     let currentIndex = 0;
     let intervalId = null;
     let delayTimeoutId = null;
+    let isHolding = false;
 
     // Display the image at the current index
     function displayImage() {
@@ -60,48 +61,63 @@
       displayImage();
     }
 
+    // Function to start continuous image switching
+    function startContinuousSwitching(isNext) {
+      if (!isHolding) {
+        isHolding = true;
+        switchImage(isNext);
+        delayTimeoutId = setTimeout(function() {
+          intervalId = setInterval(function() {
+            switchImage(isNext);
+          }, 200);
+        }, 500);
+      }
+    }
+
+    // Function to stop continuous image switching
+    function stopContinuousSwitching() {
+      if (isHolding) {
+        clearTimeout(delayTimeoutId);
+        clearInterval(intervalId);
+        isHolding = false;
+      }
+    }
+
+    // Function to switch images based on direction
+    function switchImage(isNext) {
+      if (isNext) {
+        switchToNextImage();
+      } else {
+        switchToPrevImage();
+      }
+    }
+
     // Event listener for the previous button
     document.getElementById("prevBtn").addEventListener("mousedown", function() {
-      switchToPrevImage();
-      delayTimeoutId = setTimeout(function() {
-        intervalId = setInterval(switchToPrevImage, 500);
-      }, 500);
+      startContinuousSwitching(false);
     });
 
     // Event listener for the next button
     document.getElementById("nextBtn").addEventListener("mousedown", function() {
-      switchToNextImage();
-      delayTimeoutId = setTimeout(function() {
-        intervalId = setInterval(switchToNextImage, 500);
-      }, 500);
+      startContinuousSwitching(true);
     });
 
     // Event listener to stop continuous image switching when the mouse button is released
-    document.addEventListener("mouseup", function() {
-      clearTimeout(delayTimeoutId);
-      clearInterval(intervalId);
-    });
+    document.addEventListener("mouseup", stopContinuousSwitching);
 
     // Event listener for arrow key presses
     document.addEventListener("keydown", function(event) {
       if (event.key === "ArrowLeft") {
-        switchToPrevImage();
-        delayTimeoutId = setTimeout(function() {
-          intervalId = setInterval(switchToPrevImage, 500);
-        }, 500);
+        startContinuousSwitching(false);
       } else if (event.key === "ArrowRight") {
-        switchToNextImage();
-        delayTimeoutId = setTimeout(function() {
-          intervalId = setInterval(switchToNextImage, 500);
-        }, 500);
+        startContinuousSwitching(true);
       }
     });
 
     // Event listener for arrow key releases
     document.addEventListener("keyup", function(event) {
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        clearTimeout(delayTimeoutId);
-        clearInterval(intervalId);
+        stopContinuousSwitching();
       }
     });
 
@@ -110,4 +126,5 @@
   </script>
 </body>
 </html>
+
 
