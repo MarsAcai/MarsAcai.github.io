@@ -2,63 +2,75 @@
 <html>
 <head>
   <style>
-    /* Add this CSS to disable user selection and drag-and-drop */
-    img {
-      user-select: none;
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      pointer-events: none;
-    }
-    
-    #container {
+    #imageContainer {
+      width: 400px;
+      height: 400px;
       position: relative;
+      overflow: hidden;
     }
 
-    #second-image {
-      display: none;
+    .image {
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    .visible {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <img id="first-image" src="3DTest/3D1.png" alt="First Image" draggable="false">
-    <img id="second-image" src="3DTest/3D2.png" alt="Second Image" draggable="false">
-    <img id="third-image" src="3DTest/3D3.png" alt="Third Image" draggable="false" class="hidden">
+  <div id="imageContainer">
+    <img class="image visible" src="3DTest/3D1.png" />
+    <img class="image" src="3DTest/3D2.png" />
+    <img class="image" src="3DTest/3D3.png" />
+    <img class="image" src="3DTest/3D4.png" />
+    <img class="image" src="3DTest/3D5.png" />
+    <img class="image" src="3DTest/3D6.png" />
   </div>
 
   <script>
-    var container = document.getElementById('container');
-    var secondImage = document.getElementById('second-image');
-    var thirdImage = document.getElementById('third-image');
+    var images = document.getElementsByClassName('image');
+    var currentIndex = 0;
+    var startX = 0;
 
-    container.addEventListener('mousedown', function(event) {
-      var startX = event.clientX;
-      
-      container.addEventListener('mousemove', onMouseMove);
-      container.addEventListener('mouseup', onMouseUp);
-      
-      function onMouseMove(event) {
-        var currentX = event.clientX;
-        var distance = currentX - startX;
-        
-        if (distance > 0) {
-          secondImage.style.display = 'none';
-          thirdImage.style.display = 'block';
-        } else {
-          secondImage.style.display = 'block';
-          thirdImage.style.display = 'none';
-        }
+    function showImage(index) {
+      // Hide all images
+      for (var i = 0; i < images.length; i++) {
+        images[i].classList.remove('visible');
       }
-      
-      function onMouseUp(event) {
-        container.removeEventListener('mousemove', onMouseMove);
-        container.removeEventListener('mouseup', onMouseUp);
+
+      // Show the image at the specified index
+      images[index].classList.add('visible');
+    }
+
+    function handleMouseDown(event) {
+      startX = event.clientX;
+    }
+
+    function handleMouseUp(event) {
+      var endX = event.clientX;
+      var threshold = 50; // Adjust this value to control sensitivity
+
+      // Dragged left
+      if (startX - endX > threshold) {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
       }
-    });
+      // Dragged right
+      else if (endX - startX > threshold) {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+      }
+    }
+
+    var imageContainer = document.getElementById('imageContainer');
+    imageContainer.addEventListener('mousedown', handleMouseDown);
+    imageContainer.addEventListener('mouseup', handleMouseUp);
   </script>
 </body>
 </html>
