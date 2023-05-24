@@ -1,76 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>360-Degree View Example</title>
   <style>
-    /* Add this CSS to disable user selection and drag-and-drop */
-    img {
-      user-select: none;
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      pointer-events: none;
-    }
-    
-    #container {
-      position: relative;
+    .product-view {
+      width: 400px; /* Adjust the width and height as per your requirements */
+      height: 400px;
+      overflow: hidden;
     }
 
-    .image {
-      display: none;
+    .product-view img {
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .product-view img.active {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <img id="image" src="3DTest/3D1.png" alt="First Image" draggable="false">
-    <img id="image" src="3DTest/3D2.png" alt="Second Image" draggable="false">
-    <img id="image" src="3DTest/3D3.png" alt="Second Image" draggable="false">
+  <div class="product-view">
+    <img src="3DTest/3D1.png" alt="Product Image" class="active">
+    <img src="3DTest/3D2" alt="Product Image">
+    <img src="3DTest/3D3" alt="Product Image">
   </div>
-  
- <script>
-    var container = document.getElementById('container');
-    var images = document.getElementsByClassName('image');
-    var currentIndex = 0;
 
-    container.addEventListener('mousedown', function(event) {
-      var startX = event.clientX;
+  <script>
+    var productView = document.querySelector('.product-view');
+    var productImages = productView.querySelectorAll('img');
 
-      container.addEventListener('mousemove', onMouseMove);
-      container.addEventListener('mouseup', onMouseUp);
+    var dragStartX = 0;
+    var rotation = 0;
+    var totalImages = productImages.length;
+    var imageIndex = 0; // Starting index of the images
 
-      function onMouseMove(event) {
-        var currentX = event.clientX;
-        var distance = currentX - startX;
-
-        if (distance > 0) {
-          currentIndex++;
-        } else {
-          currentIndex--;
-        }
-
-        if (currentIndex < 0) {
-          currentIndex = images.length - 1;
-        } else if (currentIndex >= images.length) {
-          currentIndex = 0;
-        }
-
-        for (var i = 0; i < images.length; i++) {
-          if (i === currentIndex) {
-            images[i].style.display = 'block';
-          } else {
-            images[i].style.display = 'none';
-          }
-        }
-      }
-
-      function onMouseUp(event) {
-        container.removeEventListener('mousemove', onMouseMove);
-        container.removeEventListener('mouseup', onMouseUp);
-      }
+    productView.addEventListener('mousedown', function(event) {
+      event.preventDefault();
+      dragStartX = event.clientX;
+      productView.style.cursor = 'grabbing';
+      document.addEventListener('mousemove', rotateProduct);
+      document.addEventListener('mouseup', stopRotateProduct);
     });
+
+    function rotateProduct(event) {
+      var dragDistance = event.clientX - dragStartX;
+      rotation += dragDistance;
+      productView.style.transform = 'rotateY(' + rotation + 'deg)';
+    }
+
+    function stopRotateProduct() {
+      productView.style.cursor = 'grab';
+      document.removeEventListener('mousemove', rotateProduct);
+      document.removeEventListener('mouseup', stopRotateProduct);
+
+      // Update the active image based on the rotation
+      updateImage();
+    }
+
+    function updateImage() {
+      var activeIndex = Math.round((rotation % 360) / 360 * totalImages);
+      if (activeIndex < 0) {
+        activeIndex += totalImages;
+      }
+
+      for (var i = 0; i < totalImages; i++) {
+        if (i === activeIndex) {
+          productImages[i].classList.add('active');
+        } else {
+          productImages[i].classList.remove('active');
+        }
+      }
+    }
   </script>
 </body>
 </html>
+
