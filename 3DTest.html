@@ -8,7 +8,7 @@
       height: auto;
     }
 
-  .button {
+    .button {
       font-size: 24px;
       padding: 10px;
       background-color: #272727;
@@ -22,6 +22,9 @@
       cursor: pointer;
     }
 
+    .active {
+      background-color: #666666;
+    }
   </style>
 </head>
 <body>
@@ -95,6 +98,8 @@
         clearTimeout(delayTimeoutId);
         clearInterval(intervalId);
         isHolding = false;
+        changePrevBtnColor(false);
+        changeNextBtnColor(false);
       }
     }
 
@@ -104,6 +109,26 @@
         switchToNextImage();
       } else {
         switchToPrevImage();
+      }
+    }
+
+    // Function to change the color of prevBtn
+    function changePrevBtnColor(active) {
+      const prevBtn = document.getElementById("prevBtn");
+      if (active) {
+        prevBtn.classList.add("active");
+      } else {
+        prevBtn.classList.remove("active");
+      }
+    }
+
+    // Function to change the color of nextBtn
+    function changeNextBtnColor(active) {
+      const nextBtn = document.getElementById("nextBtn");
+      if (active) {
+        nextBtn.classList.add("active");
+      } else {
+        nextBtn.classList.remove("active");
       }
     }
 
@@ -124,8 +149,10 @@
     document.addEventListener("keydown", function(event) {
       if (event.key === "ArrowLeft") {
         startContinuousSwitching(false);
+        changePrevBtnColor(true);
       } else if (event.key === "ArrowRight") {
         startContinuousSwitching(true);
+        changeNextBtnColor(true);
       }
     });
 
@@ -133,6 +160,11 @@
     document.addEventListener("keyup", function(event) {
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         stopContinuousSwitching();
+      }
+      if (event.key === "ArrowLeft") {
+        changePrevBtnColor(false);
+      } else if (event.key === "ArrowRight") {
+        changeNextBtnColor(false);
       }
     });
 
