@@ -27,11 +27,13 @@
   <div id="container">
     <img id="first-image" src="3DTest/3D1.png" alt="First Image" draggable="false">
     <img id="second-image" src="3DTest/3D2.png" alt="Second Image" draggable="false">
+    <img id="third-image" src="3DTest/3D3.png" alt="Third Image" draggable="false" class="hidden">
   </div>
 
   <script>
     var container = document.getElementById('container');
     var secondImage = document.getElementById('second-image');
+    var thirdImage = document.getElementById('third-image');
 
     container.addEventListener('mousedown', function(event) {
       var startX = event.clientX;
@@ -44,9 +46,11 @@
         var distance = currentX - startX;
         
         if (distance > 0) {
-          secondImage.style.display = 'block';
-        } else {
           secondImage.style.display = 'none';
+          thirdImage.style.display = 'block';
+        } else {
+          secondImage.style.display = 'block';
+          thirdImage.style.display = 'none';
         }
       }
       
