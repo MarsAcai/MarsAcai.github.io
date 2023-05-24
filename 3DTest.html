@@ -69,14 +69,21 @@ const highResImageUrls = [
     // Display the image at the current index
     function displayImage() {
       const imageDisplay = document.getElementById("imageDisplay");
-      imageDisplay.src = imageUrls[currentIndex];
+      imageDisplay.src = imageUrl;
     }
     
-    
+ 
 // Function to switch images based on direction
 function switchImage(isNext) {
-  const currentImageUrl = imageUrls[currentIndex];
-  const currentHighResImageUrl = highResImageUrls[currentIndex];
+  if (isNext) {
+    switchToNextImage();
+  } else {
+    switchToPrevImage();
+  }
+  
+  const imageUrl = isHighResMode ? highResImageUrls[currentIndex] : imageUrls[currentIndex];
+  displayImage(imageUrl);
+}
 
   if (isNext) {
     currentIndex++;
@@ -111,6 +118,7 @@ document.addEventListener("keydown", function (event) {
   } else if (event.key === "ArrowDown") {
     toggleHighResMode(false);
   }
+});
 });
 
 // Function to toggle high-resolution mode
