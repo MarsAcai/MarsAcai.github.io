@@ -100,93 +100,159 @@
     let isVHighRes = false;
     let isTopRes = false;
 
-    // Display the image at the current index
-    function displayImage() {
-      const imageDisplay = document.getElementById("imageDisplay");
-      if (isTopRes) {
-        imageDisplay.src = topResImageUrls[currentIndex];
-      } else if (isVHighRes) {
-        imageDisplay.src = vHighResImageUrls[currentIndex];
-      } else if (isHighRes) {
-        imageDisplay.src = highResImageUrls[currentIndex];
-      } else {
-        imageDisplay.src = originalImageUrls[currentIndex];
-      }
-    }
+  // Current index of the displayed image
+  let currentIndex = 0;
+  let intervalId = null;
+  let delayTimeoutId = null;
+  let isHolding = false;
+  let isHighRes = false;
+  let isVHighRes = false;
+  let isTopRes = false;
 
-    // Function to switch to the next image
-    function switchToNextImage() {
-      currentIndex++;
-      if (currentIndex >= originalImageUrls.length) {
-        currentIndex = 0;
-      }
-      displayImage();
+  // Display the image at the current index
+  function displayImage() {
+    const imageDisplay = document.getElementById("imageDisplay");
+    if (isTopRes) {
+      imageDisplay.src = topResImageUrls[currentIndex];
+    } else if (isVHighRes) {
+      imageDisplay.src = vHighResImageUrls[currentIndex];
+    } else if (isHighRes) {
+      imageDisplay.src = highResImageUrls[currentIndex];
+    } else {
+      imageDisplay.src = originalImageUrls[currentIndex];
     }
+  }
 
-    // Function to switch to the previous image
-    function switchToPrevImage() {
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = originalImageUrls.length - 1;
-      }
-      displayImage();
+  // Function to switch to the next image
+  function switchToNextImage() {
+    currentIndex++;
+    if (currentIndex >= originalImageUrls.length) {
+      currentIndex = 0;
     }
+    displayImage();
+  }
 
-    // Function to start continuous image switching
-    function startContinuousSwitching(isNext) {
-      if (!isHolding) {
-        isHolding = true;
-        switchImage(isNext);
-        delayTimeoutId = setTimeout(function() {
-          intervalId = setInterval(function() {
-            switchImage(isNext);
-          }, 200);
-        }, 500);
-      }
+  // Function to switch to the previous image
+  function switchToPrevImage() {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = originalImageUrls.length - 1;
     }
+    displayImage();
+  }
 
-    // Function to stop continuous image switching
-    function stopContinuousSwitching() {
-      if (isHolding) {
-        clearTimeout(delayTimeoutId);
-        clearInterval(intervalId);
-        isHolding = false;
-        changePrevBtnColor(false);
-        changeNextBtnColor(false);
-      }
+  // Function to start continuous image switching
+  function startContinuousSwitching(isNext) {
+    if (!isHolding) {
+      isHolding = true;
+      switchImage(isNext);
+      delayTimeoutId = setTimeout(function() {
+        intervalId = setInterval(function() {
+          switchImage(isNext);
+        }, 200);
+      }, 500);
     }
+  }
 
-    // Function to switch images based on direction
-    function switchImage(isNext) {
-      if (isNext) {
-        switchToNextImage();
-      } else {
-        switchToPrevImage();
-      }
+  // Function to stop continuous image switching
+  function stopContinuousSwitching() {
+    if (isHolding) {
+      clearTimeout(delayTimeoutId);
+      clearInterval(intervalId);
+      isHolding = false;
+      changePrevBtnColor(false);
+      changeNextBtnColor(false);
     }
+  }
 
-    // Function to change the color of prevBtn
-    function changePrevBtnColor(active) {
-      const prevBtn = document.getElementById("prevBtn");
-      if (active) {
-        prevBtn.classList.add("active");
-      } else {
-        prevBtn.classList.remove("active");
-      }
+  // Function to switch images based on direction
+  function switchImage(isNext) {
+    if (isNext) {
+      switchToNextImage();
+    } else {
+      switchToPrevImage();
     }
+  }
 
-    // Function to change the color of nextBtn
-    function changeNextBtnColor(active) {
-      const nextBtn = document.getElementById("nextBtn");
-      if (active) {
-        nextBtn.classList.add("active");
-      } else {
-        nextBtn.classList.remove("active");
-      }
+  // Function to change the color of prevBtn
+  function changePrevBtnColor(active) {
+    const prevBtn = document.getElementById("prevBtn");
+    if (active) {
+      prevBtn.classList.add("active");
+    } else {
+      prevBtn.classList.remove("active");
     }
+  }
 
-    // Function to toggle between image resolutions
-    function toggleImageResolution() {
+  // Function to change the color of nextBtn
+  function changeNextBtnColor(active) {
+    const nextBtn = document.getElementById("nextBtn");
+    if (active) {
+      nextBtn.classList.add("active");
+    } else {
+      nextBtn.classList.remove("active");
+    }
+  }
+
+  // Function to toggle between image resolutions
+  function toggleImageResolution() {
+    if (isTopRes) {
+      isTopRes = false;
+      isVHighRes = true;
+    } else if (isVHighRes) {
+      isVHighRes = false;
+      isHighRes = true;
+    } else if (isHighRes) {
+      isHighRes = false;
+    } else {
+      isHighRes = true;
+    }
+    displayImage();
+  }
+
+  // Event listener for continuous switching of previous image
+  document.getElementById("prevBtn").addEventListener("mousedown", function() {
+    startContinuousSwitching(false);
+    changePrevBtnColor(true);
+  });
+
+  // Event listener for continuous switching of next image
+  document.getElementById("nextBtn").addEventListener("mousedown", function() {
+    startContinuousSwitching(true);
+    changeNextBtnColor(true);
+  });
+
+  // Event listener for mouseup event
+  document.addEventListener("mouseup", function() {
+    stopContinuousSwitching();
+  });
+
+  // Event listener for the previous button release
+  document.getElementById("prevBtn").addEventListener("mouseup", function() {
+    stopContinuousSwitching();
+    changePrevBtnColor(false);
+    switchToPrevImage();
+  });
+
+  // Event listener for the next button release
+  document.getElementById("nextBtn").addEventListener("mouseup", function() {
+    stopContinuousSwitching();
+    changeNextBtnColor(false);
+    switchToNextImage();
+  });
+
+  // Event listener for the up key
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      toggleImageResolution();
+    }
+  });
+
+  // Event listener for the down key
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
       if (isTopRes) {
         isTopRes = false;
         isVHighRes = true;
@@ -195,71 +261,32 @@
         isHighRes = true;
       } else if (isHighRes) {
         isHighRes = false;
-        isTopRes = true;
       } else {
         isHighRes = true;
       }
       displayImage();
     }
+  });
 
-    // Event listener for the previous button
-    document.getElementById("prevBtn").addEventListener("mousedown", function() {
-      startContinuousSwitching(false);
-    });
-
-    // Event listener for the next button
-    document.getElementById("nextBtn").addEventListener("mousedown", function() {
-      startContinuousSwitching(true);
-    });
-
-    // Event listener to stop continuous image switching when the mouse button is released
-    document.addEventListener("mouseup", function() {
-      stopContinuousSwitching();
-    });
-
-    // Event listener for the previous button release
-    document.getElementById("prevBtn").addEventListener("mouseup", function() {
-      stopContinuousSwitching();
+  // Event listener for the left key
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
       switchToPrevImage();
-    });
+    }
+  });
 
-    // Event listener for the next button release
-    document.getElementById("nextBtn").addEventListener("mouseup", function() {
-      stopContinuousSwitching();
+  // Event listener for the right key
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
       switchToNextImage();
-    });
+    }
+  });
 
-    // Event listener for the up key
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "ArrowUp") {
-        event.preventDefault();
-        toggleImageResolution();
-      }
-    });
-
-    // Event listener for the down key
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "ArrowDown") {
-        event.preventDefault();
-        if (isTopRes) {
-          isTopRes = false;
-          isHighRes = true;
-        } else if (isHighRes) {
-          isHighRes = false;
-          isVHighRes = true;
-        } else if (isVHighRes) {
-          isVHighRes = false;
-          isTopRes = true;
-        } else {
-          isVHighRes = true;
-        }
-        displayImage();
-      }
-    });
-
-    // Initial image display
-    displayImage();
-  </script>
+  // Initial image display
+  displayImage();
+</script>
 </body>
 </html>
 
