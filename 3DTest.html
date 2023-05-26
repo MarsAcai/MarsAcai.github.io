@@ -86,16 +86,16 @@
     let isVHighRes = false;
 
     // Display the image at the current index
-    function displayImage() {
-      const imageDisplay = document.getElementById("imageDisplay");
-      if (isVHighRes) {
-        imageDisplay.src = vHighResImageUrls[currentIndex];
-      } else if (isHighRes) {
-        imageDisplay.src = highResImageUrls[currentIndex];
-      } else {
-        imageDisplay.src = originalImageUrls[currentIndex];
-      }
-    }
+function displayImage() {
+  const imageDisplay = document.getElementById("imageDisplay");
+  if (isVHighRes) {
+    imageDisplay.src = vHighResImageUrls[currentIndex];
+  } else if (isHighRes) {
+    imageDisplay.src = highResImageUrls[currentIndex];
+  } else {
+    imageDisplay.src = originalImageUrls[currentIndex];
+  }
+}
 
     // Function to switch to the next image
     function switchToNextImage() {
