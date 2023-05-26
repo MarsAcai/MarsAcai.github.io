@@ -182,12 +182,12 @@
         nextBtn.classList.remove("active");
       }
     }
-
 // Function to toggle between image resolutions
 function toggleHighResImage(isUpArrow) {
   if (isUpArrow) {
     if (isVHighRes) {
       isVHighRes = false;
+      isTopRes = true;
     } else if (isHighRes) {
       isHighRes = false;
       isVHighRes = true;
@@ -195,18 +195,18 @@ function toggleHighResImage(isUpArrow) {
       isHighRes = true;
     }
   } else {
-    if (isVHighRes) {
+    if (isTopRes) {
+      isTopRes = false;
+      isVHighRes = true;
+    } else if (isVHighRes) {
       isVHighRes = false;
       isHighRes = true;
-    } else if (isHighRes) {
-      isHighRes = false;
     } else {
       isVHighRes = true;
     }
   }
   displayImage();
 }
-
     // Event listener for the previous button
     document.getElementById("prevBtn").addEventListener("mousedown", function() {
       startContinuousSwitching(false);
