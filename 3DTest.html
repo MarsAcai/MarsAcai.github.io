@@ -77,6 +77,20 @@
       "3DTest/3D10vhigh.png",
     ];
 
+    // Array of top-resolution image URLs
+    const topResImageUrls = [
+      "3DTest/3D1top.png",
+      "3DTest/3D2top.png",
+      "3DTest/3D3top.png",
+      "3DTest/3D4top.png",
+      "3DTest/3D5top.png",
+      "3DTest/3D6top.png",
+      "3DTest/3D7top.png",
+      "3DTest/3D8top.png",
+      "3DTest/3D9top.png",
+      "3DTest/3D10top.png",
+    ];
+
     // Current index of the displayed image
     let currentIndex = 0;
     let intervalId = null;
@@ -84,11 +98,14 @@
     let isHolding = false;
     let isHighRes = false;
     let isVHighRes = false;
+    let isTopRes = false;
 
     // Display the image at the current index
     function displayImage() {
       const imageDisplay = document.getElementById("imageDisplay");
-      if (isVHighRes) {
+      if (isTopRes) {
+        imageDisplay.src = topResImageUrls[currentIndex];
+      } else if (isVHighRes) {
         imageDisplay.src = vHighResImageUrls[currentIndex];
       } else if (isHighRes) {
         imageDisplay.src = highResImageUrls[currentIndex];
@@ -168,29 +185,22 @@
       }
     }
 
-// Function to toggle between image resolutions
-function toggleHighResImage(isUpArrow) {
-  if (isUpArrow) {
-    if (isVHighRes) {
-      isVHighRes = false;
-    } else if (isHighRes) {
-      isHighRes = false;
-      isVHighRes = true;
-    } else {
-      isHighRes = true;
+    // Function to toggle between image resolutions
+    function toggleImageResolution() {
+      if (isTopRes) {
+        isTopRes = false;
+        isVHighRes = true;
+      } else if (isVHighRes) {
+        isVHighRes = false;
+        isHighRes = true;
+      } else if (isHighRes) {
+        isHighRes = false;
+        isTopRes = true;
+      } else {
+        isHighRes = true;
+      }
+      displayImage();
     }
-  } else {
-    if (isVHighRes) {
-      isVHighRes = false;
-      isHighRes = true;
-    } else if (isHighRes) {
-      isHighRes = false;
-    } else {
-      isVHighRes = true;
-    }
-  }
-  displayImage();
-}
 
     // Event listener for the previous button
     document.getElementById("prevBtn").addEventListener("mousedown", function() {
@@ -203,37 +213,53 @@ function toggleHighResImage(isUpArrow) {
     });
 
     // Event listener to stop continuous image switching when the mouse button is released
-    document.addEventListener("mouseup", stopContinuousSwitching);
+    document.addEventListener("mouseup", function() {
+      stopContinuousSwitching();
+    });
 
-// Event listener for arrow key presses
-document.addEventListener("keydown", function (event) {
-  if (event.key === "ArrowLeft") {
-    startContinuousSwitching(false);
-    changePrevBtnColor(true);
-  } else if (event.key === "ArrowRight") {
-    startContinuousSwitching(true);
-    changeNextBtnColor(true);
-  } else if (event.key === "ArrowUp") {
-    toggleHighResImage(true);
-  } else if (event.key === "ArrowDown") {
-    toggleHighResImage(false);
-  }
-});
+    // Event listener for the previous button release
+    document.getElementById("prevBtn").addEventListener("mouseup", function() {
+      stopContinuousSwitching();
+      switchToPrevImage();
+    });
 
-    // Event listener for arrow key releases
-    document.addEventListener("keyup", function(event) {
-      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        stopContinuousSwitching();
-      }
-      if (event.key === "ArrowLeft") {
-        changePrevBtnColor(false);
-      } else if (event.key === "ArrowRight") {
-        changeNextBtnColor(false);
+    // Event listener for the next button release
+    document.getElementById("nextBtn").addEventListener("mouseup", function() {
+      stopContinuousSwitching();
+      switchToNextImage();
+    });
+
+    // Event listener for the up key
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        toggleImageResolution();
       }
     });
 
-    // Initial display of the first image
+    // Event listener for the down key
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        if (isTopRes) {
+          isTopRes = false;
+          isHighRes = true;
+        } else if (isHighRes) {
+          isHighRes = false;
+          isVHighRes = true;
+        } else if (isVHighRes) {
+          isVHighRes = false;
+          isTopRes = true;
+        } else {
+          isVHighRes = true;
+        }
+        displayImage();
+      }
+    });
+
+    // Initial image display
     displayImage();
   </script>
 </body>
 </html>
+
