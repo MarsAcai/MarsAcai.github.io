@@ -63,17 +63,38 @@
       "3DTest/3D10high.png",
     ];
 
+    // Array of very high-resolution image URLs
+    const vHighResImageUrls = [
+      "3DTest/3D1vhigh.png",
+      "3DTest/3D2vhigh.png",
+      "3DTest/3D3vhigh.png",
+      "3DTest/3D4vhigh.png",
+      "3DTest/3D5vhigh.png",
+      "3DTest/3D6vhigh.png",
+      "3DTest/3D7vhigh.png",
+      "3DTest/3D8vhigh.png",
+      "3DTest/3D9vhigh.png",
+      "3DTest/3D10vhigh.png",
+    ];
+
     // Current index of the displayed image
     let currentIndex = 0;
     let intervalId = null;
     let delayTimeoutId = null;
     let isHolding = false;
     let isHighRes = false;
+    let isVHighRes = false;
 
     // Display the image at the current index
     function displayImage() {
       const imageDisplay = document.getElementById("imageDisplay");
-      imageDisplay.src = isHighRes ? highResImageUrls[currentIndex] : originalImageUrls[currentIndex];
+      if (isVHighRes) {
+        imageDisplay.src = vHighResImageUrls[currentIndex];
+      } else if (isHighRes) {
+        imageDisplay.src = highResImageUrls[currentIndex];
+      } else {
+        imageDisplay.src = originalImageUrls[currentIndex];
+      }
     }
 
     // Function to switch to the next image
@@ -91,21 +112,6 @@
       if (currentIndex < 0) {
         currentIndex = originalImageUrls.length - 1;
       }
-      displayImage();
-    }
-
-    // Function to switch images based on direction
-    function switchImage(isNext) {
-      if (isNext) {
-        switchToNextImage();
-      } else {
-        switchToPrevImage();
-      }
-    }
-
-    // Function to switch between original and high-res images
-    function toggleHighResImage() {
-      isHighRes = !isHighRes;
       displayImage();
     }
 
@@ -133,6 +139,15 @@
       }
     }
 
+    // Function to switch images based on direction
+    function switchImage(isNext) {
+      if (isNext) {
+        switchToNextImage();
+      } else {
+        switchToPrevImage();
+      }
+    }
+
     // Function to change the color of prevBtn
     function changePrevBtnColor(active) {
       const prevBtn = document.getElementById("prevBtn");
@@ -151,6 +166,21 @@
       } else {
         nextBtn.classList.remove("active");
       }
+    }
+
+    // Function to toggle between high-res and original images
+    function toggleHighResImage() {
+      if (isHighRes) {
+        isHighRes = false;
+        isVHighRes = false;
+      } else {
+        if (isVHighRes) {
+          isVHighRes = false;
+        } else {
+          isHighRes = true;
+        }
+      }
+      displayImage();
     }
 
     // Event listener for the previous button
