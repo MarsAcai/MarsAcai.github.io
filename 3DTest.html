@@ -168,13 +168,14 @@
       }
     }
 
+// Function to toggle between image resolutions
 function toggleHighResImage() {
   if (isVHighRes) {
     isVHighRes = false;
     isHighRes = true;
   } else if (isHighRes) {
     isHighRes = false;
-    isVHighRes = false;
+    isVHighRes = true;
   } else {
     isHighRes = true;
   }
