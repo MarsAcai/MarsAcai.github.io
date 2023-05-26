@@ -195,18 +195,20 @@ function toggleHighResImage() {
     // Event listener to stop continuous image switching when the mouse button is released
     document.addEventListener("mouseup", stopContinuousSwitching);
 
-    // Event listener for arrow key presses
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "ArrowLeft") {
-        startContinuousSwitching(false);
-        changePrevBtnColor(true);
-      } else if (event.key === "ArrowRight") {
-        startContinuousSwitching(true);
-        changeNextBtnColor(true);
-      } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-        toggleHighResImage();
-      }
-    });
+// Event listener for arrow key presses
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowLeft") {
+    startContinuousSwitching(false);
+    changePrevBtnColor(true);
+  } else if (event.key === "ArrowRight") {
+    startContinuousSwitching(true);
+    changeNextBtnColor(true);
+  } else if (event.key === "ArrowUp") {
+    toggleHighResImage(true);
+  } else if (event.key === "ArrowDown") {
+    toggleHighResImage(false);
+  }
+});
 
     // Event listener for arrow key releases
     document.addEventListener("keyup", function(event) {
