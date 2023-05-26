@@ -25,8 +25,8 @@
     .active {
       background-color: #666666;
     }
-    
-     /* Styles for up and down arrow buttons */
+
+    /* Styles for up and down arrow buttons */
     .upBtn,
     .downBtn {
       font-size: 24px;
@@ -40,11 +40,11 @@
 </head>
 <body>
   <div>
-   <button id="prevBtn" class="button prevBtn">&#8592;</button>
-   <button id="upBtn" class="button upBtn">&#8593;</button>
-   <img id="imageDisplay" src="" alt="Displayed Image">
-   <button id="downBtn" class="button downBtn">&#8595;</button>
-   <button id="nextBtn" class="button nextBtn">&#8594;</button>
+    <button id="prevBtn" class="button prevBtn">&#8592;</button>
+    <button id="upBtn" class="button upBtn">&#8593;</button>
+    <img id="imageDisplay" src="" alt="Displayed Image">
+    <button id="downBtn" class="button downBtn">&#8595;</button>
+    <button id="nextBtn" class="button nextBtn">&#8594;</button>
   </div>
 
   <script>
@@ -133,8 +133,8 @@
       if (!isHolding) {
         isHolding = true;
         switchImage(isNext);
-        delayTimeoutId = setTimeout(function() {
-          intervalId = setInterval(function() {
+        delayTimeoutId = setTimeout(function () {
+          intervalId = setInterval(function () {
             switchImage(isNext);
           }, 200);
         }, 500);
@@ -149,6 +149,8 @@
         isHolding = false;
         changePrevBtnColor(false);
         changeNextBtnColor(false);
+        changeUpBtnColor(false);
+        changeDownBtnColor(false);
       }
     }
 
@@ -225,80 +227,49 @@
       displayImage();
     }
 
-    // Event listener for the previous button
-    document.getElementById("prevBtn").addEventListener("mousedown", function() {
-      startContinuousSwitching(false);
+    // Event listener for next button click
+    document.getElementById("nextBtn").addEventListener("click", function () {
+      switchToNextImage();
     });
 
-    // Event listener for the next button
-    document.getElementById("nextBtn").addEventListener("mousedown", function() {
+    // Event listener for previous button click
+    document.getElementById("prevBtn").addEventListener("click", function () {
+      switchToPrevImage();
+    });
+
+    // Event listener for holding down the next button
+    document.getElementById("nextBtn").addEventListener("mousedown", function () {
       startContinuousSwitching(true);
+      changeNextBtnColor(true);
     });
 
-    // Event listener for the up button
-    document.getElementById("upBtn").addEventListener("click", function() {
-      simulateKeyPress("ArrowUp");
+    // Event listener for holding down the previous button
+    document.getElementById("prevBtn").addEventListener("mousedown", function () {
+      startContinuousSwitching(false);
+      changePrevBtnColor(true);
     });
 
-    // Event listener for the down button
-    document.getElementById("downBtn").addEventListener("click", function() {
-      simulateKeyPress("ArrowDown");
+    // Event listener for releasing the next/previous button
+    document.addEventListener("mouseup", function () {
+      stopContinuousSwitching();
     });
 
-    // Function to simulate a key press event
-    function simulateKeyPress(key) {
-      const event = new KeyboardEvent("keydown", { key: key });
-      document.dispatchEvent(event);
-    }
-
-    // Event listener to stop continuous image switching when the mouse button is released
-    document.addEventListener("mouseup", stopContinuousSwitching);
-
-    // Event listener for arrow key presses
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "ArrowLeft") {
-        startContinuousSwitching(false);
-        changePrevBtnColor(true);
-      } else if (event.key === "ArrowRight") {
-        startContinuousSwitching(true);
-        changeNextBtnColor(true);
-      } else if (event.key === "ArrowUp") {
-        toggleHighResImage(true);
-        changeUpBtnColor(true);
-      } else if (event.key === "ArrowDown") {
-        toggleHighResImage(false);
-        changeDownBtnColor(true);
-      }
+    // Event listener for up button click
+    document.getElementById("upBtn").addEventListener("click", function () {
+      toggleHighResImage(true);
+      changeUpBtnColor(true);
     });
 
-    // Event listener for arrow key releases
-    document.addEventListener("keyup", function(event) {
-      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        stopContinuousSwitching();
-      }
-      if (event.key === "ArrowLeft") {
-        changePrevBtnColor(false);
-      } else if (event.key === "ArrowRight") {
-        changeNextBtnColor(false);
-      } else if (event.key === "ArrowUp") {
-        changeUpBtnColor(false);
-      } else if (event.key === "ArrowDown") {
-        changeDownBtnColor(false);
-      }
+    // Event listener for down button click
+    document.getElementById("downBtn").addEventListener("click", function () {
+      toggleHighResImage(false);
+      changeDownBtnColor(true);
     });
 
-    // Event listener for keydown event on the up arrow key
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "ArrowUp") {
-        changeUpBtnColor(true);
-      }
-    });
-
-    // Event listener for keyup event on the up arrow key
-    document.addEventListener("keyup", function(event) {
-      if (event.key === "ArrowUp") {
-        changeUpBtnColor(false);
-      }
+    // Event listener for releasing the up/down button
+    document.addEventListener("mouseup", function () {
+      changeUpBtnColor(false);
+      changeDownBtnColor(false);
     });
 
     // Initial display of the first image
