@@ -214,6 +214,22 @@ function toggleHighResImage(isUpArrow) {
     document.getElementById("nextBtn").addEventListener("mousedown", function() {
       startContinuousSwitching(true);
     });
+    
+    // Event listener for the up button
+document.getElementById("upBtn").addEventListener("click", function() {
+  simulateKeyPress("ArrowUp");
+});
+
+// Event listener for the down button
+document.getElementById("downBtn").addEventListener("click", function() {
+  simulateKeyPress("ArrowDown");
+});
+
+// Function to simulate a key press event
+function simulateKeyPress(key) {
+  const event = new KeyboardEvent("keydown", { key: key });
+  document.dispatchEvent(event);
+}
 
     // Event listener to stop continuous image switching when the mouse button is released
     document.addEventListener("mouseup", stopContinuousSwitching);
