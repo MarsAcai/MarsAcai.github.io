@@ -180,6 +180,26 @@
         nextBtn.classList.remove("active");
       }
     }
+    
+    // Function to change the color of upBtn
+function changeUpBtnColor(active) {
+  const upBtn = document.getElementById("upBtn");
+  if (active) {
+    upBtn.classList.add("active");
+  } else {
+    upBtn.classList.remove("active");
+  }
+}
+    
+    // Function to change the color of downBtn
+function changeDownBtnColor(active) {
+  const downBtn = document.getElementById("downBtn");
+  if (active) {
+    downBtn.classList.add("active");
+  } else {
+    downBtn.classList.remove("active");
+  }
+}
 
 // Function to toggle between image resolutions
 function toggleHighResImage(isUpArrow) {
