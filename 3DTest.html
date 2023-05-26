@@ -185,9 +185,9 @@
 function changeUpBtnColor(active) {
   const upBtn = document.getElementById("upBtn");
   if (active) {
-    upBtn.classList.add("active");
+    upBtn.style.backgroundColor = "#666666";
   } else {
-    upBtn.classList.remove("active");
+    upBtn.style.backgroundColor = "#272727";
   }
 }
     
@@ -195,9 +195,9 @@ function changeUpBtnColor(active) {
 function changeDownBtnColor(active) {
   const downBtn = document.getElementById("downBtn");
   if (active) {
-    downBtn.classList.add("active");
+    downBtn.style.backgroundColor = "#666666";
   } else {
-    downBtn.classList.remove("active");
+    downBtn.style.backgroundColor = "#272727";
   }
 }
 
@@ -264,10 +264,8 @@ document.addEventListener("keydown", function (event) {
     changeNextBtnColor(true);
   } else if (event.key === "ArrowUp") {
     toggleHighResImage(true);
-    changeUpBtnColor(true);
   } else if (event.key === "ArrowDown") {
     toggleHighResImage(false);
-    changeDownBtnColor(true);
   }
 });
 
@@ -282,6 +280,44 @@ document.addEventListener("keydown", function (event) {
         changeNextBtnColor(false);
       }
     });
+    
+    // Event listener for arrow key presses
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowUp") {
+    changeUpBtnColor(true); // Change color of upBtn when up arrow key is pressed
+  } else if (event.key === "ArrowDown") {
+    changeDownBtnColor(true); // Change color of downBtn when down arrow key is pressed
+  }
+});
+
+// Event listener for arrow key releases
+document.addEventListener("keyup", function(event) {
+  if (event.key === "ArrowUp") {
+    changeUpBtnColor(false); // Reset color of upBtn when up arrow key is released
+  } else if (event.key === "ArrowDown") {
+    changeDownBtnColor(false); // Reset color of downBtn when down arrow key is released
+  }
+});
+
+// Function to change the color of upBtn
+function changeUpBtnColor(active) {
+  const upBtn = document.getElementById("upBtn");
+  if (active) {
+    upBtn.classList.add("active");
+  } else {
+    upBtn.classList.remove("active");
+  }
+}
+
+// Function to change the color of downBtn
+function changeDownBtnColor(active) {
+  const downBtn = document.getElementById("downBtn");
+  if (active) {
+    downBtn.classList.add("active");
+  } else {
+    downBtn.classList.remove("active");
+  }
+}
 
     // Initial display of the first image
     displayImage();
