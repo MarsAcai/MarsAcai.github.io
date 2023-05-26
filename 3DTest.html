@@ -169,15 +169,25 @@
     }
 
 // Function to toggle between image resolutions
-function toggleHighResImage() {
-  if (isVHighRes) {
-    isVHighRes = false;
-    isHighRes = true;
-  } else if (isHighRes) {
-    isHighRes = false;
-    isVHighRes = true;
+function toggleHighResImage(isUpArrow) {
+  if (isUpArrow) {
+    if (isVHighRes) {
+      isVHighRes = false;
+    } else if (isHighRes) {
+      isHighRes = false;
+      isVHighRes = true;
+    } else {
+      isHighRes = true;
+    }
   } else {
-    isHighRes = true;
+    if (isVHighRes) {
+      isVHighRes = false;
+      isHighRes = true;
+    } else if (isHighRes) {
+      isHighRes = false;
+    } else {
+      isVHighRes = true;
+    }
   }
   displayImage();
 }
