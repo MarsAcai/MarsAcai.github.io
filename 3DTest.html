@@ -264,8 +264,10 @@ document.addEventListener("keydown", function (event) {
     changeNextBtnColor(true);
   } else if (event.key === "ArrowUp") {
     toggleHighResImage(true);
+    changeUpBtnColor(true);
   } else if (event.key === "ArrowDown") {
     toggleHighResImage(false);
+    changeDownBtnColor(true);
   }
 });
 
