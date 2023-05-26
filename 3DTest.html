@@ -35,8 +35,8 @@
   </div>
 
   <script>
-    // Array of image URLs
-    const imageUrls = [
+    // Array of original image URLs
+    const originalImageUrls = [
       "3DTest/3D1.png",
       "3DTest/3D2.png",
       "3DTest/3D3.png",
@@ -49,22 +49,37 @@
       "3DTest/3D10.png",
     ];
 
+    // Array of high-resolution image URLs
+    const highResImageUrls = [
+      "3DTest/3D1high.png",
+      "3DTest/3D2high.png",
+      "3DTest/3D3high.png",
+      "3DTest/3D4high.png",
+      "3DTest/3D5high.png",
+      "3DTest/3D6high.png",
+      "3DTest/3D7high.png",
+      "3DTest/3D8high.png",
+      "3DTest/3D9high.png",
+      "3DTest/3D10high.png",
+    ];
+
     // Current index of the displayed image
     let currentIndex = 0;
     let intervalId = null;
     let delayTimeoutId = null;
     let isHolding = false;
+    let isHighRes = false;
 
     // Display the image at the current index
     function displayImage() {
       const imageDisplay = document.getElementById("imageDisplay");
-      imageDisplay.src = imageUrls[currentIndex];
+      imageDisplay.src = isHighRes ? highResImageUrls[currentIndex] : originalImageUrls[currentIndex];
     }
 
     // Function to switch to the next image
     function switchToNextImage() {
       currentIndex++;
-      if (currentIndex >= imageUrls.length) {
+      if (currentIndex >= originalImageUrls.length) {
         currentIndex = 0;
       }
       displayImage();
@@ -74,8 +89,23 @@
     function switchToPrevImage() {
       currentIndex--;
       if (currentIndex < 0) {
-        currentIndex = imageUrls.length - 1;
+        currentIndex = originalImageUrls.length - 1;
       }
+      displayImage();
+    }
+
+    // Function to switch images based on direction
+    function switchImage(isNext) {
+      if (isNext) {
+        switchToNextImage();
+      } else {
+        switchToPrevImage();
+      }
+    }
+
+    // Function to switch between original and high-res images
+    function toggleHighResImage() {
+      isHighRes = !isHighRes;
       displayImage();
     }
 
@@ -100,15 +130,6 @@
         isHolding = false;
         changePrevBtnColor(false);
         changeNextBtnColor(false);
-      }
-    }
-
-    // Function to switch images based on direction
-    function switchImage(isNext) {
-      if (isNext) {
-        switchToNextImage();
-      } else {
-        switchToPrevImage();
       }
     }
 
@@ -153,6 +174,8 @@
       } else if (event.key === "ArrowRight") {
         startContinuousSwitching(true);
         changeNextBtnColor(true);
+      } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+        toggleHighResImage();
       }
     });
 
