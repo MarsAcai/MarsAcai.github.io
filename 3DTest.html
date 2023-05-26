@@ -180,7 +180,7 @@
         nextBtn.classList.remove("active");
       }
     }
-    
+
     // Function to change the color of upBtn
     function changeUpBtnColor(active) {
       const upBtn = document.getElementById("upBtn");
@@ -190,7 +190,7 @@
         upBtn.classList.remove("active");
       }
     }
-    
+
     // Function to change the color of downBtn
     function changeDownBtnColor(active) {
       const downBtn = document.getElementById("downBtn");
@@ -234,7 +234,7 @@
     document.getElementById("nextBtn").addEventListener("mousedown", function() {
       startContinuousSwitching(true);
     });
-    
+
     // Event listener for the up button
     document.getElementById("upBtn").addEventListener("click", function() {
       simulateKeyPress("ArrowUp");
@@ -255,7 +255,7 @@
     document.addEventListener("mouseup", stopContinuousSwitching);
 
     // Event listener for arrow key presses
-    document.addEventListener("keydown", function (event) {
+    document.addEventListener("keydown", function(event) {
       if (event.key === "ArrowLeft") {
         startContinuousSwitching(false);
         changePrevBtnColor(true);
@@ -286,34 +286,20 @@
         changeDownBtnColor(false);
       }
     });
-    
-    let isUpArrowPressed = false;
 
-// Function to change the color of upBtn
-function changeUpBtnColor(active) {
-  const upBtn = document.getElementById("upBtn");
-  if (active) {
-    upBtn.classList.add("active");
-  } else {
-    upBtn.classList.remove("active");
-  }
-}
+    // Event listener for keydown event on the up arrow key
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "ArrowUp") {
+        changeUpBtnColor(true);
+      }
+    });
 
-// Event listener for keydown event on the up arrow key
-document.addEventListener("keydown", function(event) {
-  if (event.key === "ArrowUp") {
-    isUpArrowPressed = true;
-    changeUpBtnColor(true);
-  }
-});
-
-// Event listener for keyup event on the up arrow key
-document.addEventListener("keyup", function(event) {
-  if (event.key === "ArrowUp") {
-    isUpArrowPressed = false;
-    changeUpBtnColor(false);
-  }
-});
+    // Event listener for keyup event on the up arrow key
+    document.addEventListener("keyup", function(event) {
+      if (event.key === "ArrowUp") {
+        changeUpBtnColor(false);
+      }
+    });
 
     // Initial display of the first image
     displayImage();
