@@ -25,13 +25,26 @@
     .active {
       background-color: #666666;
     }
+    
+     /* Styles for up and down arrow buttons */
+    .upBtn,
+    .downBtn {
+      font-size: 24px;
+      padding: 10px;
+      background-color: #272727;
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
   </style>
 </head>
 <body>
   <div>
-    <button id="prevBtn" class="button prevBtn">&#8592;</button>
-    <img id="imageDisplay" src="" alt="Displayed Image">
-    <button id="nextBtn" class="button nextBtn">&#8594;</button>
+   button id="prevBtn" class="button prevBtn">&#8592;</button>
+   <button id="upBtn" class="button upBtn">&#8593;</button>
+   <img id="imageDisplay" src="" alt="Displayed Image">
+   <button id="downBtn" class="button downBtn">&#8595;</button>
+   <button id="nextBtn" class="button nextBtn">&#8594;</button>
   </div>
 
   <script>
