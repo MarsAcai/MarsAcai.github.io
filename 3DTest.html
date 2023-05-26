@@ -286,6 +286,34 @@
         changeDownBtnColor(false);
       }
     });
+    
+    let isUpArrowPressed = false;
+
+// Function to change the color of upBtn
+function changeUpBtnColor(active) {
+  const upBtn = document.getElementById("upBtn");
+  if (active) {
+    upBtn.classList.add("active");
+  } else {
+    upBtn.classList.remove("active");
+  }
+}
+
+// Event listener for keydown event on the up arrow key
+document.addEventListener("keydown", function(event) {
+  if (event.key === "ArrowUp") {
+    isUpArrowPressed = true;
+    changeUpBtnColor(true);
+  }
+});
+
+// Event listener for keyup event on the up arrow key
+document.addEventListener("keyup", function(event) {
+  if (event.key === "ArrowUp") {
+    isUpArrowPressed = false;
+    changeUpBtnColor(false);
+  }
+});
 
     // Initial display of the first image
     displayImage();
