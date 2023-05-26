@@ -168,21 +168,18 @@
       }
     }
 
-    // Function to toggle between high-res and vHigh-res images
-    function toggleHighResImage() {
-      if (isVHighRes) {
-        isVHighRes = false;
-        isHighRes = true;
-      } else {
-        if (isHighRes) {
-          isHighRes = false;
-          isVHighRes = true;
-        } else {
-          isHighRes = true;
-        }
-      }
-      displayImage();
-    }
+function toggleHighResImage() {
+  if (isVHighRes) {
+    isVHighRes = false;
+    isHighRes = true;
+  } else if (isHighRes) {
+    isHighRes = false;
+    isVHighRes = false;
+  } else {
+    isHighRes = true;
+  }
+  displayImage();
+}
 
     // Event listener for the previous button
     document.getElementById("prevBtn").addEventListener("mousedown", function() {
