@@ -149,6 +149,7 @@
         isHolding = false;
         changePrevBtnColor(false);
         changeNextBtnColor(false);
+        changeupBtnColor(false);
       }
     }
 
@@ -168,6 +169,16 @@
         prevBtn.classList.add("active");
       } else {
         prevBtn.classList.remove("active");
+      }
+    }
+    
+        // Function to change the color of upBtn
+    function changeupBtnColor(active) {
+      const upBtn = document.getElementById("upBtn");
+      if (active) {
+        upBtn.classList.add("active");
+      } else {
+        upBtn.classList.remove("active");
       }
     }
 
@@ -244,6 +255,7 @@ document.addEventListener("keydown", function (event) {
     changeNextBtnColor(true);
   } else if (event.key === "ArrowUp") {
     toggleHighResImage(true);
+    changeupBtnColor(true);
   } else if (event.key === "ArrowDown") {
     toggleHighResImage(false);
   }
@@ -258,6 +270,8 @@ document.addEventListener("keydown", function (event) {
         changePrevBtnColor(false);
       } else if (event.key === "ArrowRight") {
         changeNextBtnColor(false);
+      } else if (event.key === "ArrowUp") {
+        changeupBtnColor(false);
       }
     });
 
