@@ -187,40 +187,6 @@
         changeupBtnColor(false);
       }
     }
-    
-        // Variables to track arrow key state
-    let isArrowUpPressed = false;
-    let isArrowDownPressed = false;
-
-    // Function to handle key press events
-    function handleKeyPress(event) {
-      if (event.key === "ArrowUp" && !isArrowUpPressed) {
-        toggleHighResImage();
-        changeupBtnColor(true);
-        isArrowUpPressed = true;
-      } else if (event.key === "ArrowDown" && !isArrowDownPressed) {
-        toggleLowResImage();
-        changedownBtnColor(true);
-        isArrowDownPressed = true;
-      }
-    }
-
-    // Function to handle key release events
-    function handleKeyRelease(event) {
-      if (event.key === "ArrowUp") {
-        changeupBtnColor(false);
-        isArrowUpPressed = false;
-      } else if (event.key === "ArrowDown") {
-        changedownBtnColor(false);
-        isArrowDownPressed = false;
-      }
-    }
-
-    // Event listener for arrow key presses
-    document.addEventListener("keydown", handleKeyPress);
-
-    // Event listener for arrow key releases
-    document.addEventListener("keyup", handleKeyRelease);
 
     // Function to switch images based on direction
     function switchImage(isNext) {
