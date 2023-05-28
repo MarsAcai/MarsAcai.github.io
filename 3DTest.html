@@ -66,7 +66,7 @@
   </div>
 
   <script>
-    // Array of original image URLs
+    // Side view
     const originalImageUrls = [
       "3DTest/3D1.png",
       "3DTest/3D2.png",
@@ -80,7 +80,7 @@
       "3DTest/3D10.png",
     ];
 
-    // Array of high-resolution image URLs
+    // First elevation view
     const highResImageUrls = [
       "3DTest/3D1high.png",
       "3DTest/3D2high.png",
@@ -94,7 +94,7 @@
       "3DTest/3D10high.png",
     ];
 
-    // Array of very high-resolution image URLs
+    // Second elevation view
     const vHighResImageUrls = [
       "3DTest/3D1vhigh.png",
       "3DTest/3D2vhigh.png",
@@ -106,6 +106,20 @@
       "3DTest/3D8vhigh.png",
       "3DTest/3D9vhigh.png",
       "3DTest/3D10vhigh.png",
+    ];
+    
+        // Top view
+    const TopResImageUrls = [
+      "3DTest/3D1top.png,
+      "3DTest/3D2top.png",
+      "3DTest/3D3top.png",
+      "3DTest/3D4top.png",
+      "3DTest/3D5top.png",
+      "3DTest/3D6top.png",
+      "3DTest/3D7top.png",
+      "3DTest/3D8top.png",
+      "3DTest/3D9top.png",
+      "3DTest/3D10top.png",
     ];
 
     // Current index of the displayed image
@@ -119,7 +133,9 @@
     // Display the image at the current index
     function displayImage() {
       const imageDisplay = document.getElementById("imageDisplay");
-      if (isVHighRes) {
+      if (TopRes) {
+        imageDisplay.src = TopResImageUrls[currentIndex];
+      } else if (isVHighRes) {
         imageDisplay.src = vHighResImageUrls[currentIndex];
       } else if (isHighRes) {
         imageDisplay.src = highResImageUrls[currentIndex];
@@ -225,6 +241,7 @@ function toggleHighResImage(isUpArrow) {
   if (isUpArrow) {
     if (isVHighRes) {
       isVHighRes = false;
+      isTopRes = true;
     } else if (isHighRes) {
       isHighRes = false;
       isVHighRes = true;
