@@ -238,7 +238,7 @@
     }
 
 // Function to toggle between image resolutions
-function toggleHighResImage {
+function toggleHighResImage() {
     if (isVHighRes) {
       isVHighRes = false;
       isTopRes = true;
@@ -248,13 +248,12 @@ function toggleHighResImage {
     } else {
       isHighRes = true;
     }
-  } 
   displayImage();
 }
     
-    function toggleLowResImage {
-    if (isTopres) {
-      isTopres = false;
+    function toggleLowResImage() {
+    if (isTopRes) {
+      isTopRes = false;
       isVHighRes = true;
     } else if (isVHighRes) {
       isVHighRes = false;
@@ -264,7 +263,6 @@ function toggleHighResImage {
     } else {
       isVHighRes = true;
     }
-  }
   displayImage();
 }
 
