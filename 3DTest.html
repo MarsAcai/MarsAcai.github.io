@@ -171,7 +171,7 @@
         delayTimeoutId = setTimeout(function() {
           intervalId = setInterval(function() {
             switchImage(isNext);
-          }, 200);
+          }, 500);
         }, 500);
       }
     }
@@ -302,9 +302,11 @@ document.addEventListener("keydown", function (event) {
     startContinuousSwitching(true);
     changeNextBtnColor(true);
   } else if (event.key === "ArrowUp") {
+    startContinuousSwitching(true);
     toggleHighResImage(true);
     changeupBtnColor(true);
   } else if (event.key === "ArrowDown") {
+    startContinuousSwitching(true);
     toggleLowResImage(true);
     changedownBtnColor(true)
   }
@@ -321,8 +323,10 @@ document.addEventListener("keydown", function (event) {
         changeNextBtnColor(false);
       } else if (event.key === "ArrowUp") {
         changeupBtnColor(false);
+        stopContinuousSwitching();
       } else if (event.key === "ArrowDown") {
         changedownBtnColor(false);
+        stopContinuousSwitching();
       }
     });
 
