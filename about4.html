@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Input Example</title>
+</head>
+<body>
+  <input type="text" id="textInput" placeholder="Type here and press Enter">
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var inputElement = document.getElementById('textInput');
+      
+      inputElement.addEventListener('keydown', function(event) {
+        if (event.keyCode === 13) { // Enter key pressed
+          var userInput = inputElement.value.toLowerCase();
+          
+          if (userInput.includes('moon') || userInput.includes('lunar') || userInput.includes('luna')) {
+            window.location.href = 'success.html';
+          } else {
+            window.location.href = 'fail.html';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
