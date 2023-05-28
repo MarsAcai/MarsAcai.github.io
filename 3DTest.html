@@ -110,7 +110,7 @@
     
         // Top view
     const TopResImageUrls = [
-      "3DTest/3D1top.png,
+      "3DTest/3D1top.png",
       "3DTest/3D2top.png",
       "3DTest/3D3top.png",
       "3DTest/3D4top.png",
@@ -133,7 +133,7 @@
     // Display the image at the current index
     function displayImage() {
       const imageDisplay = document.getElementById("imageDisplay");
-      if (TopRes) {
+      if (isTopRes) {
         imageDisplay.src = TopResImageUrls[currentIndex];
       } else if (isVHighRes) {
         imageDisplay.src = vHighResImageUrls[currentIndex];
@@ -249,7 +249,7 @@ function toggleHighResImage(isUpArrow) {
       isHighRes = true;
     }
   } else {
-    if (Topres) {
+    if (isTopres) {
       isTopres = false;
       is VHighRes = true;
     } if (isVHighRes) {
