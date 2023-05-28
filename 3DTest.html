@@ -238,8 +238,7 @@
     }
 
 // Function to toggle between image resolutions
-function toggleHighResImage(isUpArrow) {
-  if (isUpArrow) {
+function toggleHighResImage {
     if (isVHighRes) {
       isVHighRes = false;
       isTopRes = true;
@@ -249,7 +248,11 @@ function toggleHighResImage(isUpArrow) {
     } else {
       isHighRes = true;
     }
-  } else {
+  } 
+  displayImage();
+}
+    
+    function toggleLowResImage {
     if (isTopres) {
       isTopres = false;
       isVHighRes = true;
@@ -306,7 +309,7 @@ document.addEventListener("keydown", function (event) {
     toggleHighResImage(true);
     changeupBtnColor(true);
   } else if (event.key === "ArrowDown") {
-    toggleHighResImage(false);
+    toggleLowResImage(true);
     changedownBtnColor(true)
   }
 });
