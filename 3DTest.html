@@ -45,6 +45,14 @@
 .upBtn.active {
   background-color: #666666;
 }
+    .downBtn:hover {
+  background-color: #666666;
+  cursor: pointer;
+}
+
+.downBtn.active {
+  background-color: #666666;
+}
     
   </style>
 </head>
@@ -191,6 +199,16 @@
         upBtn.classList.remove("active");
       }
     }
+    
+            // Function to change the color of downBtn
+    function changedownBtnColor(active) {
+      const upBtn = document.getElementById("downBtn");
+      if (active) {
+        downBtn.classList.add("active");
+      } else {
+        downBtn.classList.remove("active");
+      }
+    }
 
     // Function to change the color of nextBtn
     function changeNextBtnColor(active) {
@@ -268,6 +286,7 @@ document.addEventListener("keydown", function (event) {
     changeupBtnColor(true);
   } else if (event.key === "ArrowDown") {
     toggleHighResImage(false);
+    changedownBtnColor(true)
   }
 });
 
@@ -282,6 +301,8 @@ document.addEventListener("keydown", function (event) {
         changeNextBtnColor(false);
       } else if (event.key === "ArrowUp") {
         changeupBtnColor(false);
+      } else if (event.key === "ArrowDown") {
+        changedownBtnColor(false);
       }
     });
 
