@@ -2,19 +2,8 @@
 <html>
 <head>
 	<title>Mars Acai</title>
-	
 	<meta charset="UTF-8">
-	<title>Mars Acai</title>
-	<script type="text/javascript">
-		// Redirect to mobile version if user is on a mobile device
-		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-			window.location = "digitalartmobile.html";
-		}
-	</script>
-	
-	<style>	
-		
-		
+	<style>
 		body {
 			background-color: #3d3d3d; /* medium grey background */
 			font-family: sans-serif; /* sans-serif font */
@@ -27,8 +16,7 @@
 			padding: 10px;
 			text-align: center;
 		}
-		
-		
+
 		.topbar h1 {
 			margin: 0;
 			font-size: 45px;
@@ -57,24 +45,45 @@
 		.navbar a.active {
 			color: #ffff00; /* yellow color on active */
 		}
-		
+
+		.content {
+			color: #ffffff; /* white text color */
+			font-size: 30px; /* 30pt font size */
+			margin: 20px; /* add some margin to the text */
+			text-align: justify; /* justify the text */
+			line-height: 1.5; /* adjust line spacing */
+		}
+
+		.image {
+			display: block; /* make the image a block element */
+			margin: 20px auto; /* center the image horizontally with some top margin */
+			max-width: 100%; /* make sure the image doesn't exceed its container */
+		}
 	</style>
-  
-  </head>
+</head>
 <body>
 	<div class="topbar">
 		<h1>Mars Acai</h1>
 	</div>
 	<div class="navbar">
-		<a href="index.html" >Home</a>
+		<a href="index.html">Home</a>
 		<a href="sculptures.html">Sculptures</a>
 		<a href="drawings.html">Drawings</a>
-		<a href="digitalart.html" >Digital Art</a>
-		<a href="characters.html" >Characters</a>
-		<a href="about.html" class="active" style="color:#ffff00;">About</a>
+		<a href="digitalart.html">Digital Art</a>
+		<a href="characters.html">Characters</a>
+		<a href="about.html" class="active">About</a>
 	</div>
-	
-<body>
-  
+	<div class="content">
+		<p>
+I believe that good art should be able to be appreciated by anyone, on at least some level.  A person who happens to be there cleaning the building should look over at the wall and see something he can enjoy, just like an art student.  
+
+This does not involve regressing to kitsch, because a work of art is something that can be seen on multiple levels.  Someone can intuitively appreciate beauty, intricate details, or any of the other charicteristics of good art without needing to analyze the artist in a formal way.  Then, that same work of art can have its subtleties studied by an "art insider".  I would consider myself a failiure if someone wrote a long article interpreting my work but random people walking past the work didn't stop to look at it.  Instinct can be superior to intellect!
+
+This isn't saying that I'm playing make-believe that I'm in the workshop of a Renaissance master.  The fact that I'm a modern person is impossible to avoid and rather than delusionally pretending like I don't live in this era, I'd like to understand my society while also rejecting the harmful forces within it as much as I can.  I believe that there are unique particularities available to an individual in every age, and one of the purposes of this project is to the find the particularities available to me in ours.
+
+There are some general contrasts that I take a side on.  I believe in the absolute rather than the relativistic, form instead of formlessness, association instead of dissociation, and the transcendental over the purely material.  I've been influenced by monumental architecture and the works of M.C. Escher, Jacques-Louis David, Johann Wenzel Peter, and John Blanche.  Some contemporary artists whose works I personally find inspiring are Fen De Villiers, Matthew Fall McKenzie, Soey Milk, and Xue Jiye.
+		</p>
+	</div>
+	<img class="image" src="your-image.jpg" alt="Your Image">
 </body>
 </html>
