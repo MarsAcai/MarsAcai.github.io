@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Viewer</title>
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .button {
+      font-size: 24px;
+      padding: 10px;
+      background-color: #272727;
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
+
+    .button:hover {
+      background-color: #666666;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: #666666;
+    }
+    
+     /* Styles for up and down arrow buttons */
+    .upBtn,
+    .downBtn {
+      font-size: 24px;
+      padding: 10px;
+      background-color: #272727;
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
+    
+.upBtn:hover {
+  background-color: #666666;
+  cursor: pointer;
+}
+
+.upBtn.active {
+  background-color: #666666;
+}
+    .downBtn:hover {
+  background-color: #666666;
+  cursor: pointer;
+}
+
+.downBtn.active {
+  background-color: #666666;
+}
+    
+  </style>
+</head>
+<body>
+  <div>
+   <button id="prevBtn" class="button prevBtn">&#8592;</button>
+   <button id="upBtn" class="button upBtn">&#8593;</button>
+   <img id="imageDisplay" src="" alt="Displayed Image">
+   <button id="downBtn" class="button downBtn">&#8595;</button>
+   <button id="nextBtn" class="button nextBtn">&#8594;</button>
+  </div>
+
+  <script>
+    // Side view
+    const originalImageUrls = [
+      "3DTwilight/01F.jpg",
+      "3DTwilight/02F.jpg",
+      "3DTwilight/03F.jpg",
+      "3DTwilight/04F.jpg",
+      "3DTwilight/05F.jpg",
+      "3DTwilight/06F.jpg",
+      "3DTwilight/07F.jpg",
+      "3DTwilight/08F.jpg",
+      "3DTwilight/09F.jpg",
+      "3DTwilight/10F.jpg",
+      "3DTwilight/11F.jpg",
+      "3DTwilight/12F.jpg",
+    ];
+
+    // First elevation view
+    const highResImageUrls = [
+      "3DTwilight/01G.jpg",
+      "3DTwilight/02G.jpg",
+      "3DTwilight/03G.jpg",
+      "3DTwilight/04G.jpg",
+      "3DTwilight/05G.jpg",
+      "3DTwilight/06G.jpg",
+      "3DTwilight/07G.jpg",
+      "3DTwilight/08G.jpg",
+      "3DTwilight/09G.jpg",
+      "3DTwilight/10G.jpg",
+      "3DTwilight/11G.jpg",
+      "3DTwilight/12G.jpg",
+    ];
+
+    // Second elevation view
+    const vHighResImageUrls = [
+      "3DTwilight/01H.jpg",
+      "3DTwilight/02H.jpg",
+      "3DTwilight/03H.jpg",
+      "3DTwilight/04H.jpg",
+      "3DTwilight/05H.jpg",
+      "3DTwilight/06H.jpg",
+      "3DTwilight/07H.jpg",
+      "3DTwilight/08H.jpg",
+      "3DTwilight/09H.jpg",
+      "3DTwilight/10H.jpg",
+      "3DTwilight/11H.jpg",
+      "3DTwilight/12H.jpg",
+    ];
+    
+        // Top view
+    const TopResImageUrls = [
+      "3DTwilight/01I.jpg",
+      "3DTwilight/02I.jpg",
+      "3DTwilight/03I.jpg",
+      "3DTwilight/04I.jpg",
+      "3DTwilight/05I.jpg",
+      "3DTwilight/06I.jpg",
+      "3DTwilight/07I.jpg",
+      "3DTwilight/08I.jpg",
+      "3DTwilight/09I.jpg",
+      "3DTwilight/10I.jpg",
+      "3DTwilight/11I.jpg",
+      "3DTwilight/12I.jpg",
+    ];
+
+    // Current index of the displayed image
+    let currentIndex = 0;
+    let intervalId = null;
+    let delayTimeoutId = null;
+    let isHolding = false;
+    let isHighRes = false;
+    let isVHighRes = false;
+    let isTopRes = false
+
+    // Display the image at the current index
+    function displayImage() {
+      const imageDisplay = document.getElementById("imageDisplay");
+      if (isTopRes) {
+        imageDisplay.src = TopResImageUrls[currentIndex];
+      } else if (isVHighRes) {
+        imageDisplay.src = vHighResImageUrls[currentIndex];
+      } else if (isHighRes) {
+        imageDisplay.src = highResImageUrls[currentIndex];
+      } else {
+        imageDisplay.src = originalImageUrls[currentIndex];
+      }
+    }
+
+    // Function to switch to the next image
+    function switchToNextImage() {
+      currentIndex++;
+      if (currentIndex >= originalImageUrls.length) {
+        currentIndex = 0;
+      }
+      displayImage();
+    }
+
+    // Function to switch to the previous image
+    function switchToPrevImage() {
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = originalImageUrls.length - 1;
+      }
+      displayImage();
+    }
+
+    // Function to start continuous image switching
+    function startContinuousSwitching(isNext) {
+      if (!isHolding) {
+        isHolding = true;
+        switchImage(isNext);
+        delayTimeoutId = setTimeout(function() {
+          intervalId = setInterval(function() {
+            switchImage(isNext);
+          }, 200);
+        }, 500);
+      }
+    }
+
+    // Function to stop continuous image switching
+    function stopContinuousSwitching() {
+      if (isHolding) {
+        clearTimeout(delayTimeoutId);
+        clearInterval(intervalId);
+        isHolding = false;
+        changePrevBtnColor(false);
+        changeNextBtnColor(false);
+        changeupBtnColor(false);
+      }
+    }
+
+    // Function to switch images based on direction
+    function switchImage(isNext) {
+      if (isNext) {
+        switchToNextImage();
+      } else {
+        switchToPrevImage();
+      }
+    }
+
+    // Function to change the color of prevBtn
+    function changePrevBtnColor(active) {
+      const prevBtn = document.getElementById("prevBtn");
+      if (active) {
+        prevBtn.classList.add("active");
+      } else {
+        prevBtn.classList.remove("active");
+      }
+    }
+    
+        // Function to change the color of upBtn
+    function changeupBtnColor(active) {
+      const upBtn = document.getElementById("upBtn");
+      if (active) {
+        upBtn.classList.add("active");
+      } else {
+        upBtn.classList.remove("active");
+      }
+    }
+    
+            // Function to change the color of downBtn
+    function changedownBtnColor(active) {
+      const upBtn = document.getElementById("downBtn");
+      if (active) {
+        downBtn.classList.add("active");
+      } else {
+        downBtn.classList.remove("active");
+      }
+    }
+
+    // Function to change the color of nextBtn
+    function changeNextBtnColor(active) {
+      const nextBtn = document.getElementById("nextBtn");
+      if (active) {
+        nextBtn.classList.add("active");
+      } else {
+        nextBtn.classList.remove("active");
+      }
+    }
+
+// Function to toggle between image resolutions
+function toggleHighResImage() {
+    if (isVHighRes) {
+      isVHighRes = false;
+      isTopRes = true;
+    } else if (isHighRes) {
+      isHighRes = false;
+      isVHighRes = true;
+    } else {
+      isHighRes = true;
+    }
+  displayImage();
+}
+    
+    function toggleLowResImage() {
+    if (isTopRes) {
+      isTopRes = false;
+      isVHighRes = true;
+    } else if (isVHighRes) {
+      isVHighRes = false;
+      isHighRes = true;
+    } else if (isHighRes) {
+      isHighRes = false;
+    } 
+  displayImage();
+}
+
+    // Event listener for the previous button
+    document.getElementById("prevBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(false);
+    });
+
+    // Event listener for the next button
+    document.getElementById("nextBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(true);
+    });
+    
+    // Event listener for the up button
+document.getElementById("upBtn").addEventListener("click", function() {
+  simulateKeyPress("ArrowUp");
+  changeupBtnColor(false);
+});
+
+// Event listener for the down button
+document.getElementById("downBtn").addEventListener("click", function() {
+  simulateKeyPress("ArrowDown");
+  changedownBtnColor(false);
+});
+
+// Function to simulate a key press event
+function simulateKeyPress(key) {
+  const event = new KeyboardEvent("keydown", { key: key });
+  document.dispatchEvent(event);
+}
+
+    // Event listener to stop continuous image switching when the mouse button is released
+    document.addEventListener("mouseup", stopContinuousSwitching);
+
+// Event listener for arrow key presses
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowLeft") {
+    startContinuousSwitching(false);
+    changePrevBtnColor(true);
+  } else if (event.key === "ArrowRight") {
+    startContinuousSwitching(true);
+    changeNextBtnColor(true);
+  } else if (event.key === "ArrowUp") {
+    toggleHighResImage(true);
+    changeupBtnColor(true);
+  } else if (event.key === "ArrowDown") {
+    toggleLowResImage(true);
+    changedownBtnColor(true)
+  }
+});
+
+    // Event listener for arrow key releases
+    document.addEventListener("keyup", function(event) {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        stopContinuousSwitching();
+      }
+      if (event.key === "ArrowLeft") {
+        changePrevBtnColor(false);
+      } else if (event.key === "ArrowRight") {
+        changeNextBtnColor(false);
+      } else if (event.key === "ArrowUp") {
+        changeupBtnColor(false);
+      } else if (event.key === "ArrowDown") {
+        changedownBtnColor(false);
+      }
+    });
+
+    // Initial display of the first image
+    displayImage();
+  </script>
+</body>
+</html>
