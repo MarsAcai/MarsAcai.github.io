@@ -100,34 +100,34 @@
 
     // Second elevation view
     const vHighResImageUrls = [
-      "3DTwilight/01H.jpg",
-      "3DTwilight/02H.jpg",
-      "3DTwilight/03H.jpg",
-      "3DTwilight/04H.jpg",
-      "3DTwilight/05H.jpg",
-      "3DTwilight/06H.jpg",
-      "3DTwilight/07H.jpg",
-      "3DTwilight/08H.jpg",
-      "3DTwilight/09H.jpg",
-      "3DTwilight/10H.jpg",
-      "3DTwilight/11H.jpg",
-      "3DTwilight/12H.jpg",
+      "3DTwilight/01G.jpg",
+      "3DTwilight/02G.jpg",
+      "3DTwilight/03G.jpg",
+      "3DTwilight/04G.jpg",
+      "3DTwilight/05G.jpg",
+      "3DTwilight/06G.jpg",
+      "3DTwilight/07G.jpg",
+      "3DTwilight/08G.jpg",
+      "3DTwilight/09G.jpg",
+      "3DTwilight/10G.jpg",
+      "3DTwilight/11G.jpg",
+      "3DTwilight/12G.jpg",
     ];
     
         // Top view
     const TopResImageUrls = [
-      "3DTwilight/01I.jpg",
-      "3DTwilight/02I.jpg",
-      "3DTwilight/03I.jpg",
-      "3DTwilight/04I.jpg",
-      "3DTwilight/05I.jpg",
-      "3DTwilight/06I.jpg",
-      "3DTwilight/07I.jpg",
-      "3DTwilight/08I.jpg",
-      "3DTwilight/09I.jpg",
-      "3DTwilight/10I.jpg",
-      "3DTwilight/11I.jpg",
-      "3DTwilight/12I.jpg",
+      "3DTwilight/01G.jpg",
+      "3DTwilight/02G.jpg",
+      "3DTwilight/03G.jpg",
+      "3DTwilight/04G.jpg",
+      "3DTwilight/05G.jpg",
+      "3DTwilight/06G.jpg",
+      "3DTwilight/07G.jpg",
+      "3DTwilight/08G.jpg",
+      "3DTwilight/09G.jpg",
+      "3DTwilight/10G.jpg",
+      "3DTwilight/11G.jpg",
+      "3DTwilight/12G.jpg",
     ];
 
     // Current index of the displayed image
@@ -249,10 +249,10 @@
 function toggleHighResImage() {
     if (isVHighRes) {
       isVHighRes = false;
-      isTopRes = true;
+      isTopRes = false;
     } else if (isHighRes) {
-      isHighRes = false;
-      isVHighRes = true;
+      isHighRes = true;
+      isVHighRes = false;
     } else {
       isHighRes = true;
     }
