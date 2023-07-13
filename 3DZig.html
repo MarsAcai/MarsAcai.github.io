@@ -92,7 +92,15 @@
     .active {
       background-color: #666666;
     }
+	  
+	  @media (max-width: 1000px) {
+			div {
+				margin-left: 0;
+			}
+		}
   </style>
+
+	
 </head>
 <body>
 
@@ -109,7 +117,7 @@
 	</div>
 	
   <div>
-<div style="margin-left: 360px;">
+<div style="margin-left: 340px;">
     <button id="prevBtn" class="button prevBtn">&#8592;</button>
     <img id="imageDisplay" src="" alt="Displayed Image">
     <button id="nextBtn" class="button nextBtn">&#8594;</button>
