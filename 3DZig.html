@@ -95,12 +95,13 @@
   </style>
 
 	<style>
-		@media (max-width: 1000px) {
-			div {
-				margin-left: 0;
-			}
-		}
-	</style>
+ .center-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set the height to the full viewport height */
+  }
+</style>
 	
 </head>
 <body>
@@ -117,7 +118,7 @@
 		<a href="about.html" >About</a>
 	</div>
 	
-  <div>
+  <div class="center-container">
     <button id="prevBtn" class="button prevBtn">&#8592;</button>
     <img id="imageDisplay" src="" alt="Displayed Image">
     <button id="nextBtn" class="button nextBtn">&#8594;</button>
