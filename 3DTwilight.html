@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V0E1D3J26Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V0E1D3J26Z');
+</script>
+
+	<title>Mars Acai</title>
+	
+	<meta charset="UTF-8">
+	<title>Mars Acai</title>
+
+	<style>	
+		
+		
+		body {
+			margin: 0; /* Remove the default margin */
+			background-color: #3d3d3d; /* medium grey background */
+			font-family: sans-serif; /* sans-serif font */
+		}
+
+		.topbar {
+			background-color: #272727; /* dark grey top bar */
+			color: #ffff00; /* yellow title font */
+			font-style: italic; /* italic title font */
+			padding: 10px;
+			text-align: center;
+		}
+		
+		
+		.topbar h1 {
+			margin: 0;
+			font-size: 45px;
+		}
+
+		.navbar {
+			background-color: #272727; /* dark grey navigation bar */
+			color: #ffffff; /* white navigation links */
+			padding: 10px;
+			text-align: center;
+			font-size: 30px;
+		}
+
+		.navbar a {
+			display: inline-block;
+			padding: 10px;
+			color: #ffffff; /* white navigation links */
+			text-decoration: none;
+			margin: 0 12px; /* add some space between the links */
+		}
+
+		.navbar a:hover {
+			background-color: #666666; /* dark grey background on hover */
+		}
+
+		.navbar a.active {
+			color: #ffff00; /* yellow color on active */
+		}
+		
+	</style>
+	
+  <title>Image Viewer</title>
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+	    vertical-align: middle; /* Align the image vertically in its container */
+  }
+
+    .button {
+      font-size: 50px;
+      padding: 20px;
+      background-color: #272727;
+      color: #ffffff;
+      border: none;
+      outline: none;
+	height: 125px; 
+	    vertical-align: middle; /* Align the buttons vertically in their container */
+    }
+
+    .button:hover {
+      background-color: #666666;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: #666666;
+    }
+  </style>
+
+	<style>
+ .center-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set the height to the full viewport height */
+  }
+		  img {
+    max-height: 750px; /* Set the maximum height to 750 pixels */
+    width: auto; /* Maintain the original width and aspect ratio */
+  }
+</style>
+	
+</head>
+<body>
+
+	<div class="topbar">
+		<h1>Mars Acai</h1>
+	</div>
+	<div class="navbar">
+		<a href="index.html" >Home</a>
+		<a href="sculptures.html" style="color:#ffff00;">Sculptures</a>
+		<a href="drawings.html">Drawings</a>
+		<a href="digitalart.html">Digital Art</a>
+		<a href="characters.html" >Characters</a>
+		<a href="about.html" >About</a>
+	</div>
+	
+  <div class="center-container">
+    <button id="prevBtn" class="button prevBtn">&#8592;</button>
+    <img id="imageDisplay" src="" alt="Displayed Image">
+    <button id="nextBtn" class="button nextBtn">&#8594;</button>
+  </div>
+
+  <script>
+    // Array of image URLs
+    const imageUrls = [
+    "3DTwilight/033DTw.jpg",
+    "3DTwilight/043DTw.jpg",
+    "3DTwilight/053DTw.jpg",
+    "3DTwilight/063DTw.jpg",
+    "3DTwilight/073DTw.jpg",
+    "3DTwilight/083DTw.jpg",
+    "3DTwilight/093DTw.jpg",
+    "3DTwilight/103DTw.jpg",
+    "3DTwilight/113DTw.jpg",
+    "3DTwilight/123DTw.jpg",
+    "3DTwilight/013DTw.jpg",
+    "3DTwilight/023DTw.jpg",
+    ];
+
+    // Current index of the displayed image
+    let currentIndex = 0;
+    let intervalId = null;
+    let delayTimeoutId = null;
+    let isHolding = false;
+
+    // Display the image at the current index
+    function displayImage() {
+      const imageDisplay = document.getElementById("imageDisplay");
+      imageDisplay.src = imageUrls[currentIndex];
+    }
+
+    // Function to switch to the next image
+    function switchToNextImage() {
+      currentIndex++;
+      if (currentIndex >= imageUrls.length) {
+        currentIndex = 0;
+      }
+      displayImage();
+    }
+
+    // Function to switch to the previous image
+    function switchToPrevImage() {
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = imageUrls.length - 1;
+      }
+      displayImage();
+    }
+
+    // Function to start continuous image switching
+    function startContinuousSwitching(isNext) {
+      if (!isHolding) {
+        isHolding = true;
+        switchImage(isNext);
+        delayTimeoutId = setTimeout(function() {
+          intervalId = setInterval(function() {
+            switchImage(isNext);
+          }, 200);
+        }, 500);
+      }
+    }
+
+    // Function to stop continuous image switching
+    function stopContinuousSwitching() {
+      if (isHolding) {
+        clearTimeout(delayTimeoutId);
+        clearInterval(intervalId);
+        isHolding = false;
+        changePrevBtnColor(false);
+        changeNextBtnColor(false);
+      }
+    }
+
+    // Function to switch images based on direction
+    function switchImage(isNext) {
+      if (isNext) {
+        switchToNextImage();
+      } else {
+        switchToPrevImage();
+      }
+    }
+
+    // Function to change the color of prevBtn
+    function changePrevBtnColor(active) {
+      const prevBtn = document.getElementById("prevBtn");
+      if (active) {
+        prevBtn.classList.add("active");
+      } else {
+        prevBtn.classList.remove("active");
+      }
+    }
+
+    // Function to change the color of nextBtn
+    function changeNextBtnColor(active) {
+      const nextBtn = document.getElementById("nextBtn");
+      if (active) {
+        nextBtn.classList.add("active");
+      } else {
+        nextBtn.classList.remove("active");
+      }
+    }
+
+    // Event listener for the previous button
+    document.getElementById("prevBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(false);
+    });
+
+    // Event listener for the next button
+    document.getElementById("nextBtn").addEventListener("mousedown", function() {
+      startContinuousSwitching(true);
+    });
+
+    // Event listener to stop continuous image switching when the mouse button is released
+    document.addEventListener("mouseup", stopContinuousSwitching);
+
+    // Event listener for arrow key presses
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "ArrowLeft") {
+        startContinuousSwitching(false);
+        changePrevBtnColor(true);
+      } else if (event.key === "ArrowRight") {
+        startContinuousSwitching(true);
+        changeNextBtnColor(true);
+      }
+    });
+
+    // Event listener for arrow key releases
+    document.addEventListener("keyup", function(event) {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        stopContinuousSwitching();
+      }
+      if (event.key === "ArrowLeft") {
+        changePrevBtnColor(false);
+      } else if (event.key === "ArrowRight") {
+        changeNextBtnColor(false);
+      }
+    });
+
+    // Initial display of the first image
+    displayImage();
+  </script>
+</body>
+</html>
